@@ -1,0 +1,1103 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title><%= title %></title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="/css/shared.css">
+    <style>
+        /* Page-specific styles for Home */
+        
+        /* Hero Section */
+        .hero {
+            min-height: 100vh;
+            padding-top: 120px;
+            padding-bottom: 64px;
+            background: linear-gradient(135deg, rgba(255,255,255,0.95) 0%, rgba(248,250,251,0.95) 50%, rgba(255,255,255,0.95) 100%);
+            display: flex;
+            align-items: center;
+            position: relative;
+            opacity: 0;
+            animation: heroReveal var(--transition-slow) 0.2s forwards;
+        }
+        
+        .hero::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background-image: 
+                repeating-linear-gradient(45deg, transparent, transparent 80px, rgba(0, 174, 239, 0.015) 80px, rgba(0, 174, 239, 0.015) 81px),
+                repeating-linear-gradient(-45deg, transparent, transparent 80px, rgba(8, 48, 80, 0.01) 80px, rgba(8, 48, 80, 0.01) 81px);
+            pointer-events: none;
+        }
+        
+        @keyframes heroReveal {
+            to { opacity: 1; transform: translateY(0); }
+        }
+        
+        .hero-grid {
+            display: grid;
+            grid-template-columns: 1.3fr 0.7fr;
+            gap: 80px;
+            align-items: center;
+            position: relative;
+            z-index: 10;
+        }
+        
+        .hero-content h1 {
+            font-size: clamp(2.5rem, 5vw, 4.5rem);
+            font-weight: 900;
+            line-height: 1.05;
+            margin-bottom: 32px;
+            letter-spacing: -0.03em;
+            color: var(--navy-primary);
+        }
+        
+        .hero-content h1 .cyan {
+            color: var(--cyan-primary);
+            display: inline-block;
+            position: relative;
+        }
+        
+        .hero-content h1 .cyan::after {
+            content: '';
+            position: absolute;
+            bottom: -8px;
+            left: 0;
+            right: 0;
+            height: 3px;
+            background: var(--cyan-primary);
+            transform: scaleX(0);
+            transform-origin: left;
+            animation: underlineReveal 0.8s ease 1.4s forwards;
+        }
+        
+        @keyframes underlineReveal {
+            to { transform: scaleX(1); }
+        }
+        
+        .hero-label {
+            display: inline-flex;
+            align-items: center;
+            padding: 12px 20px;
+            margin-bottom: 32px;
+            background: white;
+            border-left: 3px solid var(--cyan-primary);
+            box-shadow: 0 2px 12px rgba(0,0,0,0.04);
+        }
+        
+        .hero-label p {
+            font-size: 10px;
+            text-transform: uppercase;
+            letter-spacing: 0.15em;
+            color: var(--gray-600);
+            font-weight: 600;
+        }
+        
+        .hero-description {
+            font-size: 18px;
+            color: var(--gray-600);
+            margin-bottom: 40px;
+            max-width: 600px;
+            line-height: 1.5;
+        }
+        
+        .hero-buttons {
+            display: flex;
+            gap: 16px;
+            margin-bottom: 48px;
+        }
+        
+        .btn-primary {
+            background: linear-gradient(135deg, var(--cyan-primary), var(--cyan-dark));
+            color: white;
+            padding: 14px 32px;
+            border: none;
+            font-weight: 600;
+            font-size: 14px;
+            cursor: pointer;
+            text-transform: uppercase;
+            letter-spacing: 0.05em;
+            transition: all var(--transition-base);
+            box-shadow: 0 2px 8px rgba(0, 174, 239, 0.15);
+        }
+        
+        .btn-primary:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 12px 30px rgba(0, 174, 239, 0.3);
+        }
+        
+        .btn-secondary {
+            background: transparent;
+            color: var(--navy-primary);
+            padding: 14px 32px;
+            border: 2px solid var(--navy-primary);
+            font-weight: 600;
+            font-size: 14px;
+            cursor: pointer;
+            transition: all var(--transition-base);
+        }
+        
+        .btn-secondary:hover {
+            background: var(--navy-primary);
+            color: white;
+            transform: translateY(-3px);
+        }
+        
+        .stats-grid {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 16px;
+            max-width: 400px;
+        }
+        
+        .stat-card {
+            background: linear-gradient(135deg, #ffffff 0%, #fcfcfd 100%);
+            padding: 40px 24px;
+            min-height: 140px;
+            text-align: center;
+            box-shadow: 0 1px 2px rgba(0, 0, 0, 0.02), 0 4px 8px rgba(0, 0, 0, 0.02);
+            transition: all var(--transition-base);
+            cursor: pointer;
+            border: 1px solid rgba(229, 231, 235, 0.8);
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .stat-card:hover {
+            transform: translateY(-12px) scale(1.02);
+            box-shadow: 0 24px 48px rgba(0, 174, 239, 0.12);
+            border-color: rgba(0, 174, 239, 0.3);
+        }
+        
+        .stat-value {
+            font-size: 1.875rem;
+            font-weight: 800;
+            color: var(--gray-400);
+            margin-bottom: 12px;
+            transition: all var(--transition-base);
+        }
+        
+        .stat-card:hover .stat-value {
+            color: var(--cyan-primary);
+            transform: scale(1.05);
+        }
+        
+        .stat-label {
+            font-size: 9px;
+            color: var(--gray-500);
+            font-weight: 600;
+            letter-spacing: 0.15em;
+            text-transform: uppercase;
+        }
+        
+        .stat-hover-text {
+            position: absolute;
+            bottom: 24px;
+            left: 20px;
+            right: 20px;
+            text-align: center;
+            font-size: 11px;
+            color: var(--navy-primary);
+            font-weight: 600;
+            opacity: 0;
+            transform: translateY(10px);
+            transition: all var(--transition-base);
+        }
+        
+        .stat-card:hover .stat-label { opacity: 0; transform: translateY(-8px); }
+        .stat-card:hover .stat-hover-text { opacity: 0.9; transform: translateY(0); }
+        
+        /* Awards Section */
+        .awards-section {
+            padding: 80px 0;
+            background: linear-gradient(180deg, #ffffff 0%, #fafbfc 50%, #ffffff 100%);
+            position: relative;
+        }
+        
+        .awards-header {
+            text-align: center;
+            margin-bottom: 64px;
+        }
+        
+        .section-label {
+            font-size: 11px;
+            text-transform: uppercase;
+            letter-spacing: 0.2em;
+            color: var(--cyan-primary);
+            font-weight: 700;
+            margin-bottom: 16px;
+        }
+        
+        .section-title {
+            font-size: clamp(2rem, 4vw, 3rem);
+            font-weight: 900;
+            color: var(--navy-primary);
+            line-height: 1.15;
+            margin-bottom: 16px;
+        }
+        
+        .section-desc {
+            font-size: 18px;
+            color: var(--gray-600);
+            max-width: 600px;
+            margin: 0 auto;
+        }
+        
+        .awards-grid-compressed {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 24px;
+            max-width: 1000px;
+            margin: 0 auto;
+        }
+        
+        .award-card {
+            background: white;
+            padding: 48px 32px;
+            text-align: center;
+            border: 2px solid var(--gray-200);
+            transition: all var(--transition-base);
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .award-card:hover {
+            transform: translateY(-8px);
+            border-color: var(--cyan-primary);
+            box-shadow: 0 20px 40px rgba(0, 174, 239, 0.15);
+        }
+        
+        .award-card-number {
+            font-size: 4rem;
+            font-weight: 900;
+            color: var(--cyan-primary);
+            line-height: 1;
+            margin-bottom: 8px;
+        }
+        
+        .award-card-label {
+            font-size: 16px;
+            font-weight: 700;
+            color: var(--navy-primary);
+            margin-bottom: 4px;
+        }
+        
+        .award-card-sub {
+            font-size: 12px;
+            color: var(--gray-500);
+            text-transform: uppercase;
+            letter-spacing: 0.1em;
+        }
+        
+        .award-icon, .award-sparkle, .award-details, .heat-map-glow, .data-scan, .particle-system, .particle {
+            display: none;
+        }
+        
+        /* Trust Section */
+        .trust-section {
+            padding: 60px 0;
+            background: var(--navy-primary);
+            text-align: center;
+        }
+        
+        .trust-label {
+            font-size: 10px;
+            text-transform: uppercase;
+            letter-spacing: 0.2em;
+            color: rgba(255,255,255,0.5);
+            font-weight: 600;
+            margin-bottom: 24px;
+        }
+        
+        .client-logos {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: center;
+            gap: 32px;
+        }
+        
+        .logo-item {
+            font-size: 14px;
+            font-weight: 700;
+            color: rgba(255,255,255,0.7);
+            padding: 8px 16px;
+            transition: color var(--transition-fast);
+        }
+        
+        .logo-item:hover {
+            color: var(--cyan-primary);
+        }
+        
+        /* Services Section */
+        .services-section {
+            padding: 100px 0;
+            background: linear-gradient(180deg, #fafbfc 0%, white 100%);
+        }
+        
+        .section-header {
+            text-align: center;
+            margin-bottom: 64px;
+        }
+        
+        .services-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 32px;
+        }
+        
+        .service-card {
+            background: white;
+            padding: 48px 32px;
+            border: 2px solid var(--gray-200);
+            transition: all var(--transition-base);
+        }
+        
+        .service-card:hover {
+            transform: translateY(-8px);
+            border-color: var(--cyan-primary);
+            box-shadow: 0 20px 40px rgba(0,0,0,0.08);
+        }
+        
+        .service-label {
+            font-size: 10px;
+            text-transform: uppercase;
+            letter-spacing: 0.15em;
+            color: var(--cyan-primary);
+            font-weight: 700;
+            margin-bottom: 12px;
+        }
+        
+        .service-card h3 {
+            font-size: 1.5rem;
+            font-weight: 800;
+            color: var(--navy-primary);
+            margin-bottom: 12px;
+        }
+        
+        .service-tagline {
+            font-size: 15px;
+            color: var(--gray-600);
+            margin-bottom: 16px;
+            font-weight: 500;
+        }
+        
+        .service-desc {
+            font-size: 14px;
+            color: var(--gray-500);
+            line-height: 1.6;
+            margin-bottom: 24px;
+        }
+        
+        .service-features {
+            list-style: none;
+            margin-bottom: 32px;
+        }
+        
+        .service-features li {
+            font-size: 13px;
+            color: var(--gray-600);
+            padding: 8px 0;
+            padding-left: 20px;
+            position: relative;
+            border-bottom: 1px solid var(--gray-100);
+        }
+        
+        .service-features li::before {
+            content: '→';
+            position: absolute;
+            left: 0;
+            color: var(--cyan-primary);
+        }
+        
+        .service-metric {
+            display: flex;
+            align-items: baseline;
+            gap: 12px;
+        }
+        
+        .metric-number {
+            font-size: 2rem;
+            font-weight: 900;
+            color: var(--cyan-primary);
+        }
+        
+        .metric-text {
+            font-size: 10px;
+            font-weight: 700;
+            color: var(--gray-500);
+            text-transform: uppercase;
+            letter-spacing: 0.1em;
+        }
+        
+        .underline-reveal {
+            color: var(--navy-primary);
+            font-weight: 600;
+        }
+        
+        /* Define & Find Section */
+        .define-find {
+            padding: 100px 0;
+            background: var(--navy-primary);
+            color: white;
+        }
+        
+        .define-find .section-label {
+            color: var(--cyan-primary);
+        }
+        
+        .define-find .section-title {
+            color: white;
+        }
+        
+        .define-find .section-desc {
+            color: rgba(255,255,255,0.7);
+        }
+        
+        .capability-grid {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 48px;
+            margin-top: 64px;
+        }
+        
+        .capability-block {
+            background: rgba(255,255,255,0.05);
+            padding: 48px;
+            border: 1px solid rgba(255,255,255,0.1);
+        }
+        
+        .capability-block h3 {
+            font-size: 1.5rem;
+            margin-bottom: 16px;
+        }
+        
+        .capability-block p {
+            color: rgba(255,255,255,0.7);
+            margin-bottom: 24px;
+        }
+        
+        .capability-features {
+            list-style: none;
+        }
+        
+        .capability-features li {
+            font-size: 14px;
+            padding: 12px 0;
+            padding-left: 24px;
+            border-bottom: 1px solid rgba(255,255,255,0.1);
+            position: relative;
+            color: rgba(255,255,255,0.8);
+        }
+        
+        .capability-features li::before {
+            content: '✓';
+            position: absolute;
+            left: 0;
+            color: var(--cyan-primary);
+        }
+        
+        .highlight-define, .highlight-find {
+            color: var(--cyan-primary);
+        }
+        
+        .capability-visual, .data-constellation, .constellation-node, .constellation-line, .data-pulse,
+        .signal-wave-container, .signal-wave, .signal-center, .signal-core {
+            display: none;
+        }
+        
+        .unified-message {
+            text-align: center;
+            margin-top: 64px;
+            padding: 48px;
+            background: rgba(0, 174, 239, 0.1);
+            border: 1px solid rgba(0, 174, 239, 0.2);
+        }
+        
+        .unified-message h3 {
+            font-size: 1.5rem;
+            margin-bottom: 16px;
+        }
+        
+        .unified-message p {
+            color: rgba(255,255,255,0.8);
+            max-width: 700px;
+            margin: 0 auto;
+        }
+        
+        /* Timeline Section */
+        .timeline-section {
+            padding: 100px 0;
+            background: linear-gradient(180deg, white 0%, #fafbfc 100%);
+        }
+        
+        .timeline-header {
+            text-align: center;
+            margin-bottom: 64px;
+        }
+        
+        .timeline-grid {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 24px;
+        }
+        
+        .timeline-card {
+            background: white;
+            padding: 32px 24px;
+            border: 2px solid var(--gray-200);
+            transition: all var(--transition-base);
+        }
+        
+        .timeline-card:hover {
+            transform: translateY(-4px);
+            border-color: var(--cyan-primary);
+        }
+        
+        .timeline-year {
+            font-size: 2rem;
+            font-weight: 900;
+            color: var(--gray-300);
+            margin-bottom: 8px;
+        }
+        
+        .timeline-badge {
+            display: inline-block;
+            font-size: 9px;
+            font-weight: 700;
+            text-transform: uppercase;
+            letter-spacing: 0.1em;
+            padding: 4px 8px;
+            background: var(--gray-100);
+            color: var(--gray-600);
+            margin-bottom: 12px;
+        }
+        
+        .timeline-card.victory .timeline-badge {
+            background: rgba(0, 174, 239, 0.1);
+            color: var(--cyan-primary);
+        }
+        
+        .timeline-card.presidential .timeline-badge {
+            background: var(--cyan-primary);
+            color: white;
+        }
+        
+        .timeline-card h4 {
+            font-size: 1rem;
+            font-weight: 700;
+            color: var(--navy-primary);
+            margin-bottom: 8px;
+        }
+        
+        .timeline-card p {
+            font-size: 13px;
+            color: var(--gray-600);
+            line-height: 1.5;
+        }
+        
+        .timeline-summary {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 24px;
+            margin-top: 64px;
+            padding-top: 48px;
+            border-top: 2px solid var(--gray-200);
+        }
+        
+        .summary-stat {
+            text-align: center;
+        }
+        
+        .summary-stat .stat-num {
+            font-size: 2.5rem;
+            font-weight: 900;
+            color: var(--gray-400);
+            display: block;
+        }
+        
+        .summary-stat.featured .stat-num {
+            color: var(--cyan-primary);
+        }
+        
+        .summary-stat .stat-label {
+            font-size: 10px;
+            color: var(--gray-500);
+            text-transform: uppercase;
+            letter-spacing: 0.1em;
+        }
+        
+        /* Thought Leadership */
+        .thought-leadership {
+            padding: 100px 0;
+            background: var(--navy-primary);
+        }
+        
+        .thought-leadership .section-label {
+            color: var(--cyan-primary);
+        }
+        
+        .thought-leadership .section-title {
+            color: white;
+        }
+        
+        .thought-leadership .section-desc {
+            color: rgba(255,255,255,0.7);
+        }
+        
+        .media-carousel-container {
+            position: relative;
+            overflow: hidden;
+            margin-top: 48px;
+        }
+        
+        .media-carousel {
+            display: flex;
+            gap: 32px;
+            transition: transform 0.5s ease;
+        }
+        
+        .media-card {
+            flex: 0 0 calc(33.333% - 22px);
+            background: rgba(255,255,255,0.05);
+            padding: 32px;
+            border: 1px solid rgba(255,255,255,0.1);
+        }
+        
+        .media-header {
+            display: flex;
+            justify-content: space-between;
+            font-size: 11px;
+            color: var(--cyan-primary);
+            text-transform: uppercase;
+            letter-spacing: 0.1em;
+            margin-bottom: 16px;
+        }
+        
+        .media-card h3 {
+            font-size: 1.25rem;
+            color: white;
+            margin-bottom: 12px;
+        }
+        
+        .media-card > p {
+            font-size: 14px;
+            color: rgba(255,255,255,0.7);
+            margin-bottom: 24px;
+        }
+        
+        .media-insights h4 {
+            font-size: 11px;
+            text-transform: uppercase;
+            letter-spacing: 0.1em;
+            color: var(--cyan-primary);
+            margin-bottom: 12px;
+        }
+        
+        .media-insights ul {
+            list-style: none;
+            margin-bottom: 24px;
+        }
+        
+        .media-insights li {
+            font-size: 13px;
+            color: rgba(255,255,255,0.6);
+            padding: 6px 0;
+            padding-left: 16px;
+            position: relative;
+        }
+        
+        .media-insights li::before {
+            content: '→';
+            position: absolute;
+            left: 0;
+            color: var(--cyan-primary);
+        }
+        
+        .media-link {
+            color: var(--cyan-primary);
+            font-size: 13px;
+            font-weight: 600;
+            text-decoration: none;
+        }
+        
+        .media-carousel-nav, .carousel-indicators {
+            display: none;
+        }
+        
+        /* CTA Bridge - Override footer for home page */
+        .home-cta {
+            text-align: center;
+            padding: 48px 0 0;
+        }
+        
+        .home-cta .bridge-button {
+            background: var(--cyan-primary);
+        }
+        
+        /* Responsive */
+        @media (max-width: 1024px) {
+            .hero-grid { grid-template-columns: 1fr; gap: 48px; }
+            .stats-grid { max-width: 100%; }
+            .awards-grid-compressed { grid-template-columns: repeat(2, 1fr); }
+            .services-grid { grid-template-columns: 1fr; }
+            .capability-grid { grid-template-columns: 1fr; }
+            .timeline-grid { grid-template-columns: repeat(2, 1fr); }
+            .timeline-summary { grid-template-columns: repeat(2, 1fr); }
+        }
+        
+        @media (max-width: 768px) {
+            .hero { padding-top: 100px; min-height: auto; }
+            .hero-content h1 { font-size: 2rem; }
+            .hero-buttons { flex-direction: column; }
+            .awards-grid-compressed { grid-template-columns: 1fr; }
+            .media-card { flex: 0 0 100%; }
+        }
+    </style>
+</head>
+<body>
+    <%- include('partials/header') %>
+
+    <!-- Hero Section -->
+    <section class="hero">
+        <div class="container">
+            <div class="hero-grid">
+                <div class="hero-content">
+                    <div class="hero-label">
+                        <p>WHEN MARGINS MATTER</p>
+                    </div>
+                    <h1>
+                        WE FIND WHO<br>
+                        <span class="cyan">MATTERS</span>
+                    </h1>
+                    <p class="hero-description">
+                        The precision audience intelligence firm that finds the critical margins that determine outcomes.
+                    </p>
+                    <div class="hero-buttons">
+                        <a href="#contact" class="btn-primary">LET'S WIN</a>
+                        <a href="/problem" class="btn-secondary">SEE THE PROBLEM</a>
+                    </div>
+                    <div style="font-size: 12px; color: var(--gray-500); font-weight: 600; letter-spacing: 0.12em; text-transform: uppercase;">
+                        PROVEN IN POLITICS | TRUSTED IN BUSINESS
+                    </div>
+                </div>
+                <div class="stats-grid">
+                    <div class="stat-card">
+                        <div class="stat-value">$3B+</div>
+                        <div class="stat-label">MANAGED</div>
+                        <div class="stat-hover-text">Across 10,000+ Vendors</div>
+                    </div>
+                    <div class="stat-card">
+                        <div class="stat-value">750+</div>
+                        <div class="stat-label">VICTORIES</div>
+                        <div class="stat-hover-text">Including 3 Presidential</div>
+                    </div>
+                    <div class="stat-card">
+                        <div class="stat-value">52</div>
+                        <div class="stat-label">AWARDS</div>
+                        <div class="stat-hover-text">In Just 2 Years</div>
+                    </div>
+                    <div class="stat-card">
+                        <div class="stat-value">3:4</div>
+                        <div class="stat-label">FLIPS</div>
+                        <div class="stat-hover-text">Common Denominator in Victory</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Awards Section -->
+    <section class="awards-section">
+        <div class="container">
+            <div class="awards-header">
+                <p class="section-label">INDUSTRY RECOGNITION</p>
+                <h2 class="section-title">42 Awards. Two Cycles.<br>One Clear Leader.</h2>
+                <p class="section-desc">More innovation awards than agencies 10x our size. Because precision wins recognition.</p>
+            </div>
+            
+            <div class="awards-grid-compressed">
+                <div class="award-card">
+                    <div class="award-card-number">22</div>
+                    <div class="award-card-label">Reed Awards</div>
+                    <div class="award-card-sub">Political Excellence</div>
+                </div>
+                
+                <div class="award-card">
+                    <div class="award-card-number">18</div>
+                    <div class="award-card-label">Pollie Awards</div>
+                    <div class="award-card-sub">Campaign Innovation</div>
+                </div>
+                
+                <div class="award-card">
+                    <div class="award-card-number">2</div>
+                    <div class="award-card-label">Campaign Tech</div>
+                    <div class="award-card-sub">Technology Leadership</div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Trust Section -->
+    <section class="trust-section">
+        <div class="container">
+            <p class="trust-label">TRUSTED WHERE VICTORY IS NON-NEGOTIABLE</p>
+            <div class="client-logos">
+                <span class="logo-item">NRSC</span>
+                <span class="logo-item">NRCC</span>
+                <span class="logo-item">RGA</span>
+                <span class="logo-item">RAGA</span>
+                <span class="logo-item">RSLC</span>
+                <span class="logo-item">CLF</span>
+                <span class="logo-item">SLF</span>
+                <span class="logo-item">Fortune 500</span>
+            </div>
+            
+            <p class="trust-label" style="margin-top: 32px;">AS SEEN IN</p>
+            <div class="client-logos">
+                <span class="logo-item">NYTimes</span>
+                <span class="logo-item">WSJ</span>
+                <span class="logo-item">POLITICO</span>
+                <span class="logo-item">The Hill</span>
+                <span class="logo-item">NBC</span>
+                <span class="logo-item">Fortune</span>
+                <span class="logo-item">C-SPAN</span>
+                <span class="logo-item">RCP</span>
+            </div>
+        </div>
+    </section>
+
+    <!-- Define & Find Section -->
+    <section class="define-find" id="define">
+        <div class="container">
+            <div class="section-header">
+                <p class="section-label">THE MODERN MEDIA CHALLENGE</p>
+                <h2 class="section-title">One Intelligence System.<br>Every Audience. Any Channel.</h2>
+                <p class="section-desc">
+                    We're not just a media buying firm. We're not just data scientists. We're the unified audience intelligence and activation platform that solves the complete challenge of modern media.
+                </p>
+            </div>
+            
+            <div class="capability-grid">
+                <div class="capability-block">
+                    <h3><span class="highlight-define">Define</span> Your Audience</h3>
+                    <p>Every campaign starts with precision. We don't guess who matters - we know.</p>
+                    <ul class="capability-features">
+                        <li>220M+ voter profiles with 1,300 data points</li>
+                        <li>7M+ healthcare practitioners by specialty</li>
+                        <li>6M+ businesses tracked by decision makers</li>
+                        <li>Custom audience modeling & segmentation</li>
+                        <li>Privacy-compliant identity resolution</li>
+                    </ul>
+                </div>
+                
+                <div class="capability-block">
+                    <h3><span class="highlight-find">Find</span> Them Everywhere</h3>
+                    <p>Your audience isn't in one place. Neither are we. Complete reach across every screen.</p>
+                    <ul class="capability-features">
+                        <li>Linear TV optimization across 210 DMAs</li>
+                        <li>Connected TV with 86% match rates</li>
+                        <li>Digital ecosystem activation</li>
+                        <li>Clean room technology for privacy</li>
+                        <li>Cross-device journey orchestration</li>
+                    </ul>
+                </div>
+            </div>
+            
+            <div class="unified-message">
+                <h3>The Power of Unified Intelligence</h3>
+                <p>
+                    While others fragment your strategy across vendors, we deliver one system that sees everything, optimizes continuously, and wins consistently. From Fortune 500 boardrooms to Senate races to healthcare outcomes - precision at scale.
+                </p>
+            </div>
+        </div>
+    </section>
+
+    <!-- Services Section -->
+    <section class="services-section" id="services">
+        <div class="container">
+            <div class="section-header">
+                <p class="section-label">THREE FIGHTS. ONE INTELLIGENCE SYSTEM.</p>
+                <h2 class="section-title">Precision Across Industries</h2>
+            </div>
+
+            <div class="services-grid">
+                <div class="service-card">
+                    <p class="service-label">ELECTIONS & ADVOCACY</p>
+                    <h3>Political & Campaigns</h3>
+                    <p class="service-tagline">Find the <span class="underline-reveal">15,000 voters</span> who decide everything</p>
+                    <p class="service-desc">
+                        In competitive races, margins are measured in thousands. We identify persuadable voters, track them everywhere, and reach them first.
+                    </p>
+                    <ul class="service-features">
+                        <li>220M voter profiles with persuadability scores</li>
+                        <li>Real-time audience migration intelligence</li>
+                        <li>FEC-compliant attribution & verification</li>
+                    </ul>
+                    <div class="service-metric">
+                        <span class="metric-number">750+</span>
+                        <span class="metric-text">CAMPAIGNS WON</span>
+                    </div>
+                </div>
+
+                <div class="service-card">
+                    <p class="service-label">CORPORATE INFLUENCE</p>
+                    <h3>Public Affairs & B2B</h3>
+                    <p class="service-tagline">Reach the <span class="underline-reveal">decision-makers</span> who shape your future</p>
+                    <p class="service-desc">
+                        Proxy battles, regulatory fights, stakeholder campaigns - victories depend on reaching the right executives and officials.
+                    </p>
+                    <ul class="service-features">
+                        <li>C-suite & board-level influencer mapping</li>
+                        <li>Decision-maker journey orchestration</li>
+                        <li>Cross-platform narrative amplification</li>
+                    </ul>
+                    <div class="service-metric">
+                        <span class="metric-number">$3B+</span>
+                        <span class="metric-text">DEPLOYED WITH PRECISION</span>
+                    </div>
+                </div>
+
+                <div class="service-card">
+                    <p class="service-label">HEALTHCARE OUTCOMES</p>
+                    <h3>Healthcare & Pharma</h3>
+                    <p class="service-tagline">Reach <span class="underline-reveal">HCPs by specialty</span>, patients by journey</p>
+                    <p class="service-desc">
+                        Target healthcare providers by prescribing behavior. Identify patient populations by condition journey stage. All HIPAA compliant.
+                    </p>
+                    <ul class="service-features">
+                        <li>7M+ HCP targeting by specialty & Rx</li>
+                        <li>Condition journey mapping (HIPAA compliant)</li>
+                        <li>Clinical trial recruitment optimization</li>
+                    </ul>
+                    <div class="service-metric">
+                        <span class="metric-number">175M+</span>
+                        <span class="metric-text">HEALTH SIGNALS TRACKED</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Timeline Section -->
+    <section class="timeline-section" id="timeline">
+        <div class="container">
+            <div class="timeline-header">
+                <p class="section-label">FOUR DECADES OF BREAKTHROUGHS</p>
+                <h2 class="section-title">Built on Victory & Innovation</h2>
+                <p class="section-desc">From founding in 1985 to defining the future of media intelligence.</p>
+            </div>
+
+            <div class="timeline-grid">
+                <div class="timeline-card innovation">
+                    <div class="timeline-year">1985</div>
+                    <span class="timeline-badge">INNOVATION</span>
+                    <h4>Founded</h4>
+                    <p>National Media established. Beginning of data-driven political advertising.</p>
+                </div>
+
+                <div class="timeline-card innovation">
+                    <div class="timeline-year">1992</div>
+                    <span class="timeline-badge">INNOVATION</span>
+                    <h4>Built CMAG</h4>
+                    <p>Created Campaign Media Analysis Group - industry standard for ad tracking.</p>
+                </div>
+
+                <div class="timeline-card victory presidential">
+                    <div class="timeline-year">2000</div>
+                    <span class="timeline-badge">★ PRESIDENTIAL VICTORY</span>
+                    <h4>Bush-Cheney 2000</h4>
+                    <p>Florida decided by 537 votes. The beginning of precision politics.</p>
+                </div>
+
+                <div class="timeline-card victory presidential">
+                    <div class="timeline-year">2016</div>
+                    <span class="timeline-badge">★ PRESIDENTIAL VICTORY</span>
+                    <h4>Trump 2016</h4>
+                    <p>Flipped MI, WI, PA - The Blue Wall. Won by 77,000 votes across three states.</p>
+                </div>
+
+                <div class="timeline-card innovation">
+                    <div class="timeline-year">2020</div>
+                    <span class="timeline-badge">INNOVATION</span>
+                    <h4>Advanced CTV Platform</h4>
+                    <p>Launched household-level targeting. 86% match rate vs 62% industry standard.</p>
+                </div>
+
+                <div class="timeline-card innovation">
+                    <div class="timeline-year">2022</div>
+                    <span class="timeline-badge">INNOVATION</span>
+                    <h4>Clean Room Technology</h4>
+                    <p>Privacy-first data collaboration. Match audiences without sharing PII.</p>
+                </div>
+
+                <div class="timeline-card victory">
+                    <div class="timeline-year">2024</div>
+                    <span class="timeline-badge">VICTORY</span>
+                    <h4>Pennsylvania Senate Upset</h4>
+                    <p>McCormick defeats Casey. Found 261,847 voters opponents missed.</p>
+                </div>
+
+                <div class="timeline-card innovation">
+                    <div class="timeline-year">2025</div>
+                    <span class="timeline-badge">INNOVATION</span>
+                    <h4>Six Systems Platform</h4>
+                    <p>Complete integration of all audience intelligence tools.</p>
+                </div>
+            </div>
+            
+            <div class="timeline-summary">
+                <div class="summary-stat">
+                    <span class="stat-num">750+</span>
+                    <span class="stat-label">CAMPAIGNS WON</span>
+                </div>
+                <div class="summary-stat featured">
+                    <span class="stat-num">3</span>
+                    <span class="stat-label">PRESIDENTIAL VICTORIES</span>
+                </div>
+                <div class="summary-stat">
+                    <span class="stat-num">42</span>
+                    <span class="stat-label">INDUSTRY AWARDS</span>
+                </div>
+                <div class="summary-stat">
+                    <span class="stat-num">$3B+</span>
+                    <span class="stat-label">MEDIA MANAGED</span>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <%- include('partials/footer') %>
+
+    <script>
+        // Navbar scroll effect
+        window.addEventListener('scroll', () => {
+            const navbar = document.getElementById('navbar');
+            if (window.scrollY > 50) {
+                navbar.classList.add('scrolled');
+            } else {
+                navbar.classList.remove('scrolled');
+            }
+        });
+        
+        // Smooth scroll for anchor links
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function(e) {
+                e.preventDefault();
+                const target = document.querySelector(this.getAttribute('href'));
+                if (target) {
+                    target.scrollIntoView({ behavior: 'smooth', block: 'start' });
+                }
+            });
+        });
+    </script>
+</body>
+</html>
+
+

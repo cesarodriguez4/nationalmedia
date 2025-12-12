@@ -1,0 +1,1183 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="National Media - Political media intelligence firm with 750+ victories. We find the forgotten 50% of voters that receive only 6% of impressions.">
+    <title><%= title %></title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="/css/shared.css">
+    <style>
+        /* Page-specific styles for Problem page */
+        
+        /* Hero Section */
+        .hero {
+            min-height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            padding-top: calc(var(--nav-height) + 48px);
+            padding-bottom: 64px;
+            position: relative;
+            background: #F8F9FA;
+            overflow: hidden;
+        }
+        
+        .hero::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background-image: 
+                repeating-linear-gradient(45deg, transparent, transparent 100px, rgba(8, 48, 80, 0.008) 100px, rgba(8, 48, 80, 0.008) 100.5px),
+                repeating-linear-gradient(-45deg, transparent, transparent 100px, rgba(0, 174, 239, 0.005) 100px, rgba(0, 174, 239, 0.005) 100.5px);
+            pointer-events: none;
+        }
+        
+        .hero__content {
+            text-align: center;
+            max-width: 1100px;
+            margin: 0 auto;
+            position: relative;
+            z-index: 1;
+        }
+        
+        .hero__label {
+            font-size: 0.813rem;
+            font-weight: 700;
+            text-transform: uppercase;
+            letter-spacing: 0.2em;
+            color: var(--red-primary);
+            margin-bottom: 32px;
+            opacity: 0;
+            animation: fadeInUp 0.8s var(--ease-out-expo) 0.2s forwards;
+        }
+        
+        .hero__title {
+            font-size: clamp(3rem, 6vw, 5rem);
+            font-weight: 900;
+            color: var(--navy-primary);
+            letter-spacing: -0.03em;
+            line-height: 1.1;
+            margin-bottom: 16px;
+            opacity: 0;
+            animation: fadeInUp 1s var(--ease-out-expo) 0.4s forwards;
+        }
+        
+        .hero__subtitle {
+            font-size: clamp(1.375rem, 2.25vw, 1.875rem);
+            color: var(--gray-600);
+            font-weight: 400;
+            margin-bottom: 64px;
+            opacity: 0;
+            animation: fadeInUp 0.8s var(--ease-out-expo) 0.6s forwards;
+            line-height: 1.45;
+        }
+        
+        @keyframes fadeInUp {
+            from { opacity: 0; transform: translateY(20px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+        
+        @keyframes fadeIn {
+            to { opacity: 1; }
+        }
+        
+        /* Statistics */
+        .hero__stats {
+            display: flex;
+            justify-content: center;
+            align-items: stretch;
+            max-width: 900px;
+            margin: 0 auto 64px;
+            opacity: 0;
+            animation: fadeIn 1s var(--ease-out-expo) 1s forwards;
+            border: 2px solid #E8EBF0;
+            background: white;
+            box-shadow: 0 4px 24px rgba(8, 48, 80, 0.04);
+        }
+        
+        .hero__stat {
+            flex: 1;
+            text-align: center;
+            padding: 48px 32px;
+            position: relative;
+        }
+        
+        .hero__stat:first-child {
+            border-right: 2px solid #E8EBF0;
+        }
+        
+        .hero__stat-value {
+            font-size: clamp(6rem, 10vw, 8rem);
+            font-weight: 900;
+            line-height: 0.9;
+            display: block;
+            margin-bottom: 24px;
+            color: var(--navy-primary);
+        }
+        
+        .hero__stat--secondary .hero__stat-value {
+            color: var(--red-primary);
+        }
+        
+        .hero__stat-label {
+            font-size: 0.813rem;
+            text-transform: uppercase;
+            letter-spacing: 0.15em;
+            color: var(--gray-500);
+            font-weight: 700;
+            display: block;
+            margin-bottom: 6px;
+        }
+        
+        .hero__stat-sublabel {
+            font-size: 1rem;
+            color: var(--gray-500);
+            line-height: 1.4;
+            letter-spacing: 0.05em;
+            text-transform: uppercase;
+            font-weight: 600;
+        }
+        
+        /* Audience Divide Visualization */
+        .audience-divide {
+            max-width: 1000px;
+            margin: 0 auto 64px;
+            opacity: 0;
+            animation: fadeIn 1s ease-out 1.5s forwards;
+        }
+        
+        .audience-divide__container {
+            background: linear-gradient(135deg, #FCFCFD 0%, white 100%);
+            border-radius: 8px;
+            padding: 32px;
+            border: 2px solid #E8EBF0;
+            box-shadow: 0 4px 20px rgba(8, 48, 80, 0.04);
+        }
+        
+        .audience-divide__grid {
+            display: grid;
+            grid-template-columns: 1fr auto 1fr;
+            gap: 32px;
+            align-items: stretch;
+        }
+        
+        .voter-half__bar {
+            height: 60px;
+            background: linear-gradient(135deg, #F5F6F8 0%, #FAFBFC 100%);
+            border-radius: 4px;
+            position: relative;
+            overflow: hidden;
+            margin-bottom: 24px;
+            border: 1px solid #DFE2E7;
+            width: 100%;
+        }
+        
+        .voter-half__bar-fill {
+            height: 100%;
+            position: absolute;
+            left: 0;
+            top: 0;
+            border-radius: 3px;
+            display: flex;
+            align-items: center;
+            justify-content: flex-end;
+            padding-right: 16px;
+        }
+        
+        .voter-half--saturated .voter-half__bar-fill {
+            background: linear-gradient(135deg, var(--navy-primary) 0%, #0A4A6E 100%);
+        }
+        
+        .voter-half--forgotten .voter-half__bar-fill {
+            background: linear-gradient(135deg, var(--red-primary) 0%, #E63946 100%);
+            transition: width 1.5s var(--ease-out-expo) 0.5s;
+        }
+        
+        .voter-half__value {
+            font-size: 1.5rem;
+            font-weight: 900;
+            color: white;
+        }
+        
+        .voter-half--forgotten .voter-half__value {
+            position: absolute;
+            right: 16px;
+            top: 50%;
+            transform: translateY(-50%);
+            color: var(--red-primary);
+        }
+        
+        .voter-half__dots {
+            display: grid;
+            grid-template-columns: repeat(10, 1fr);
+            gap: 7px;
+            margin-bottom: 16px;
+            padding: 12px;
+            background: linear-gradient(135deg, transparent 0%, rgba(8, 48, 80, 0.01) 100%);
+            border-radius: 4px;
+        }
+        
+        .voter-dot {
+            width: 11px;
+            height: 11px;
+            border-radius: 50%;
+            background: #E8EAED;
+            opacity: 0.3;
+        }
+        
+        .voter-dot--active {
+            background: var(--navy-primary);
+            opacity: 1;
+            box-shadow: 0 1px 2px rgba(8, 48, 80, 0.2);
+        }
+        
+        .voter-half--forgotten .voter-dot {
+            background: #FFD4D4;
+            opacity: 0.5;
+        }
+        
+        .audience-divide__center {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            position: relative;
+        }
+        
+        .audience-divide__line {
+            width: 2px;
+            height: 100%;
+            background: linear-gradient(180deg, transparent, var(--gray-300) 10%, var(--gray-300) 90%, transparent);
+            position: absolute;
+        }
+        
+        .audience-divide__label {
+            background: white;
+            padding: 8px 16px;
+            font-size: 10px;
+            font-weight: 700;
+            letter-spacing: 0.15em;
+            color: var(--gray-400);
+            text-transform: uppercase;
+            border: 1px solid var(--gray-200);
+            border-radius: 20px;
+            z-index: 2;
+        }
+        
+        .voter-half__label {
+            text-align: center;
+        }
+        
+        .voter-half__label-main {
+            display: block;
+            font-size: 0.875rem;
+            font-weight: 700;
+            text-transform: uppercase;
+            letter-spacing: 0.08em;
+            margin-bottom: 4px;
+            color: var(--navy-primary);
+        }
+        
+        .voter-half__label-sub {
+            display: block;
+            font-size: 0.875rem;
+            color: var(--gray-500);
+        }
+        
+        .audience-divide__caption {
+            text-align: center;
+            margin-top: 32px;
+            padding-top: 32px;
+            border-top: 1px solid var(--gray-200);
+        }
+        
+        .audience-divide__caption p {
+            font-size: 1.125rem;
+            color: var(--gray-600);
+        }
+        
+        .underline-scroll {
+            font-weight: 700;
+            color: var(--red-primary);
+        }
+        
+        /* Insight Section */
+        .insight {
+            padding: 100px 0;
+            background: var(--gray-50);
+            position: relative;
+        }
+        
+        .insight::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background-image: 
+                repeating-linear-gradient(115deg, transparent, transparent 100px, rgba(8, 48, 80, 0.015) 100px, rgba(8, 48, 80, 0.015) 101px),
+                repeating-linear-gradient(-115deg, transparent, transparent 100px, rgba(0, 174, 239, 0.01) 100px, rgba(0, 174, 239, 0.01) 101px);
+            pointer-events: none;
+        }
+        
+        .insight__content {
+            max-width: 900px;
+            margin: 0 auto;
+            text-align: center;
+            position: relative;
+            z-index: 1;
+        }
+        
+        .insight__label {
+            font-size: 0.75rem;
+            font-weight: 700;
+            text-transform: uppercase;
+            letter-spacing: 0.15em;
+            color: var(--cyan-dark);
+            margin-bottom: 16px;
+        }
+        
+        .insight__title {
+            font-size: clamp(2rem, 3.5vw, 3rem);
+            font-weight: 900;
+            color: var(--navy-primary);
+            margin-bottom: 24px;
+            line-height: 1.15;
+        }
+        
+        .insight__text {
+            font-size: 1.25rem;
+            color: var(--gray-600);
+            line-height: 1.6;
+            margin-bottom: 64px;
+            max-width: 700px;
+            margin-left: auto;
+            margin-right: auto;
+        }
+        
+        .insight__text strong {
+            color: var(--navy-primary);
+            font-weight: 700;
+        }
+        
+        .margin-comparison {
+            display: flex;
+            justify-content: center;
+            align-items: stretch;
+            max-width: 800px;
+            margin: 64px auto;
+        }
+        
+        .margin-item {
+            flex: 1;
+            text-align: center;
+            background: white;
+            padding: 48px 24px;
+            transition: all 0.3s ease;
+            cursor: pointer;
+            border: 2px solid #E8EBF0;
+            border-right: none;
+        }
+        
+        .margin-item:last-child {
+            border-right: 2px solid #E8EBF0;
+        }
+        
+        .margin-item:hover {
+            transform: translateY(-4px);
+            box-shadow: var(--shadow-lg);
+            z-index: 10;
+            border-color: var(--cyan-primary);
+        }
+        
+        .margin-item__value {
+            display: block;
+            font-size: 2.25rem;
+            font-weight: 900;
+            color: var(--gray-600);
+            margin-bottom: 8px;
+        }
+        
+        .margin-item--featured {
+            position: relative;
+        }
+        
+        .margin-item--featured::after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            right: 0;
+            height: 4px;
+            background: var(--red-primary);
+        }
+        
+        .margin-item--featured .margin-item__value {
+            font-size: 3.75rem;
+            color: var(--red-primary);
+        }
+        
+        .margin-item__label {
+            display: block;
+            font-size: 11px;
+            font-weight: 700;
+            text-transform: uppercase;
+            letter-spacing: 0.08em;
+            color: var(--gray-500);
+            margin-bottom: 4px;
+        }
+        
+        .margin-item--featured .margin-item__label {
+            color: var(--navy-primary);
+        }
+        
+        .margin-item__context {
+            display: block;
+            font-size: 10px;
+            font-weight: 600;
+            text-transform: uppercase;
+            letter-spacing: 0.06em;
+            color: var(--gray-400);
+        }
+        
+        .margin-item--featured .margin-item__context {
+            color: var(--red-primary);
+            font-weight: 700;
+        }
+        
+        .insight__emphasis {
+            font-size: 1.5rem;
+            font-weight: 700;
+            color: var(--navy-primary);
+            margin-top: 32px;
+        }
+        
+        .insight__emphasis span {
+            font-size: 1.125rem;
+            font-weight: 400;
+            color: var(--gray-600);
+            display: block;
+            margin-top: 12px;
+        }
+        
+        /* Timeline Section */
+        .timeline {
+            padding: 100px 0;
+            background: linear-gradient(180deg, white 0%, var(--gray-50) 100%);
+            position: relative;
+        }
+        
+        .timeline__header {
+            text-align: center;
+            margin-bottom: 64px;
+        }
+        
+        .timeline__label {
+            font-size: 0.75rem;
+            font-weight: 700;
+            text-transform: uppercase;
+            letter-spacing: 0.2em;
+            color: var(--cyan-dark);
+            margin-bottom: 12px;
+        }
+        
+        .timeline__title {
+            font-size: clamp(2rem, 3.5vw, 3rem);
+            font-weight: 900;
+            color: var(--navy-primary);
+            margin-bottom: 12px;
+        }
+        
+        .timeline__description {
+            font-size: 1.125rem;
+            color: var(--gray-600);
+        }
+        
+        .timeline__container {
+            max-width: 1200px;
+            margin: 0 auto;
+            position: relative;
+            padding-top: 80px;
+        }
+        
+        .timeline__track {
+            height: 3px;
+            background: var(--gray-200);
+            position: absolute;
+            top: 40px;
+            left: 5%;
+            right: 5%;
+        }
+        
+        .timeline__progress {
+            height: 100%;
+            background: linear-gradient(90deg, var(--cyan-primary) 0%, var(--cyan-dark) 33%, var(--navy-primary) 66%, var(--red-primary) 100%);
+            width: 0;
+            transition: width 2s var(--ease-out-expo);
+        }
+        
+        .timeline__phases {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 24px;
+            position: relative;
+            z-index: 2;
+        }
+        
+        .timeline-phase {
+            text-align: center;
+            opacity: 0;
+            animation: fadeInUp 0.6s var(--ease-out-expo) forwards;
+        }
+        
+        .timeline-phase:nth-child(1) { animation-delay: 0.8s; }
+        .timeline-phase:nth-child(2) { animation-delay: 1.0s; }
+        .timeline-phase:nth-child(3) { animation-delay: 1.2s; }
+        .timeline-phase:nth-child(4) { animation-delay: 1.4s; }
+        
+        .timeline-phase__marker {
+            width: 80px;
+            height: 80px;
+            background: white;
+            border: 3px solid var(--cyan-primary);
+            border-radius: 50%;
+            margin: -40px auto 0;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            box-shadow: var(--shadow-md);
+            transition: all var(--transition-base);
+        }
+        
+        .timeline-phase--victory .timeline-phase__marker {
+            border-color: var(--red-primary);
+            background: var(--red-primary);
+        }
+        
+        .timeline-phase__number {
+            font-size: 1.5rem;
+            font-weight: 700;
+            color: var(--cyan-primary);
+        }
+        
+        .timeline-phase--victory .timeline-phase__number {
+            color: white;
+        }
+        
+        .timeline-phase:hover .timeline-phase__marker {
+            transform: scale(1.15);
+            box-shadow: 0 12px 32px rgba(0, 174, 239, 0.2);
+        }
+        
+        .timeline-phase__card {
+            background: white;
+            padding: 24px 16px;
+            margin-top: 24px;
+            border-radius: 8px;
+            border: 1px solid var(--gray-200);
+            box-shadow: var(--shadow-sm);
+            transition: all var(--transition-base);
+        }
+        
+        .timeline-phase:hover .timeline-phase__card {
+            transform: translateY(-4px);
+            box-shadow: var(--shadow-lg);
+            border-color: var(--cyan-primary);
+        }
+        
+        .timeline-phase__title {
+            font-size: 1.25rem;
+            font-weight: 700;
+            color: var(--navy-primary);
+            margin-bottom: 4px;
+        }
+        
+        .timeline-phase__days {
+            font-size: 11px;
+            font-weight: 600;
+            text-transform: uppercase;
+            letter-spacing: 0.1em;
+            color: var(--gray-500);
+            display: block;
+            margin-bottom: 16px;
+        }
+        
+        .timeline-phase__actions {
+            list-style: none;
+            text-align: left;
+        }
+        
+        .timeline-phase__action {
+            font-size: 0.875rem;
+            color: var(--gray-600);
+            margin-bottom: 12px;
+            padding-left: 16px;
+            position: relative;
+        }
+        
+        .timeline-phase__action::before {
+            content: '→';
+            position: absolute;
+            left: 0;
+            color: var(--cyan-primary);
+        }
+        
+        .timeline-phase__action strong {
+            color: var(--navy-primary);
+            font-weight: 700;
+        }
+        
+        .timeline-phase--victory .timeline-phase__action strong {
+            color: var(--red-primary);
+        }
+        
+        /* Case Study Section */
+        .case-study {
+            padding: 100px 0;
+            background: linear-gradient(135deg, var(--slate-700) 0%, var(--slate-800) 100%);
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .case-study::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background-image: 
+                repeating-linear-gradient(45deg, transparent, transparent 40px, rgba(255, 255, 255, 0.02) 40px, rgba(255, 255, 255, 0.02) 41px),
+                repeating-linear-gradient(-45deg, transparent, transparent 40px, rgba(0, 174, 239, 0.025) 40px, rgba(0, 174, 239, 0.025) 41px);
+            pointer-events: none;
+        }
+        
+        .case-study__header {
+            text-align: center;
+            margin-bottom: 64px;
+            position: relative;
+            z-index: 1;
+        }
+        
+        .case-study__label {
+            display: inline-block;
+            font-size: 11px;
+            color: white;
+            background: var(--cyan-primary);
+            font-weight: 700;
+            letter-spacing: 0.2em;
+            text-transform: uppercase;
+            padding: 10px 24px;
+            margin-bottom: 24px;
+        }
+        
+        .case-study__title {
+            font-size: clamp(2rem, 3.5vw, 3.2rem);
+            font-weight: 900;
+            color: white;
+            line-height: 1.15;
+        }
+        
+        .case-study__stats {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 24px;
+            margin-bottom: 64px;
+            position: relative;
+            z-index: 1;
+        }
+        
+        .case-stat {
+            padding: 48px 24px;
+            text-align: center;
+            transition: all 0.4s ease;
+            cursor: pointer;
+            border: 2px solid rgba(255, 255, 255, 0.1);
+            background: linear-gradient(135deg, rgba(255, 255, 255, 0.08) 0%, rgba(255, 255, 255, 0.04) 100%);
+            backdrop-filter: blur(10px);
+        }
+        
+        .case-stat:nth-child(3) {
+            background: linear-gradient(135deg, rgba(220, 38, 38, 0.15) 0%, rgba(220, 38, 38, 0.08) 100%);
+            border-color: rgba(220, 38, 38, 0.3);
+        }
+        
+        .case-stat:nth-child(3) .case-stat__value {
+            color: #FF6B6B;
+        }
+        
+        .case-stat:nth-child(4) {
+            background: linear-gradient(135deg, rgba(0, 174, 239, 0.15) 0%, rgba(0, 174, 239, 0.08) 100%);
+            border-color: rgba(0, 174, 239, 0.3);
+        }
+        
+        .case-stat:nth-child(4) .case-stat__value {
+            color: var(--cyan-light);
+        }
+        
+        .case-stat:hover {
+            transform: translateY(-4px);
+            box-shadow: 0 12px 24px rgba(0, 0, 0, 0.3);
+        }
+        
+        .case-stat__label {
+            font-size: 11px;
+            text-transform: uppercase;
+            letter-spacing: 0.12em;
+            color: rgba(255, 255, 255, 0.9);
+            font-weight: 700;
+            margin-bottom: 12px;
+            display: block;
+        }
+        
+        .case-stat__value {
+            font-size: 3rem;
+            font-weight: 900;
+            color: white;
+            margin-bottom: 8px;
+            transition: all var(--transition-base);
+        }
+        
+        .case-stat:hover .case-stat__value {
+            transform: scale(1.05);
+        }
+        
+        .case-stat__sublabel {
+            font-size: 0.875rem;
+            color: rgba(255, 255, 255, 0.6);
+        }
+        
+        .case-study__result {
+            background: linear-gradient(135deg, rgba(30, 41, 59, 0.95) 0%, rgba(15, 23, 42, 0.98) 100%);
+            border: 2px solid rgba(0, 174, 239, 0.2);
+            padding: 64px;
+            max-width: 900px;
+            margin: 0 auto;
+            display: grid;
+            grid-template-columns: 1fr auto;
+            gap: 64px;
+            align-items: center;
+            box-shadow: 0 0 40px rgba(0, 174, 239, 0.1), 0 20px 60px rgba(0, 0, 0, 0.5);
+            position: relative;
+            z-index: 1;
+        }
+        
+        .case-study__result::after {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            height: 2px;
+            background: linear-gradient(90deg, transparent, var(--cyan-primary), transparent);
+        }
+        
+        .case-study__result-content h3 {
+            font-size: 1.5rem;
+            font-weight: 800;
+            color: white;
+            margin-bottom: 16px;
+        }
+        
+        .case-study__result-content p {
+            font-size: 1.125rem;
+            color: rgba(255, 255, 255, 0.7);
+            line-height: 1.5;
+        }
+        
+        .case-study__result-content p strong {
+            color: var(--cyan-primary);
+            font-weight: 700;
+        }
+        
+        .case-study__result-metric {
+            text-align: center;
+            padding-left: 32px;
+            border-left: 2px solid rgba(0, 174, 239, 0.2);
+            min-width: 200px;
+        }
+        
+        .case-study__result-number {
+            font-size: 4.5rem;
+            font-weight: 900;
+            color: var(--cyan-primary);
+            line-height: 1;
+            margin-bottom: 8px;
+            text-shadow: 0 0 30px rgba(0, 174, 239, 0.4);
+        }
+        
+        .case-study__result-label {
+            font-size: 11px;
+            text-transform: uppercase;
+            letter-spacing: 0.15em;
+            color: rgba(255, 255, 255, 0.6);
+            font-weight: 700;
+        }
+        
+        /* Responsive */
+        @media (max-width: 1024px) {
+            .timeline__phases { grid-template-columns: repeat(2, 1fr); row-gap: 48px; }
+            .timeline__track { display: none; }
+            .case-study__stats { grid-template-columns: repeat(2, 1fr); }
+            .case-study__result { grid-template-columns: 1fr; gap: 32px; padding: 48px; }
+            .case-study__result-metric { padding-left: 0; padding-top: 24px; border-left: none; border-top: 2px solid rgba(0, 174, 239, 0.2); }
+        }
+        
+        @media (max-width: 768px) {
+            .hero__stats { flex-direction: row; }
+            .hero__stat { padding: 32px 16px; }
+            .hero__stat:first-child { border-right: 2px solid #E8EBF0; border-bottom: none; }
+            .hero__stat-value { font-size: clamp(3rem, 12vw, 5rem); }
+            .audience-divide__grid { grid-template-columns: 1fr; gap: 0; }
+            .audience-divide__center { display: none; }
+            .voter-half { padding: 16px; }
+            .voter-half--saturated { border-bottom: 1px solid var(--gray-200); }
+            .margin-comparison { display: grid; grid-template-columns: repeat(2, 1fr); gap: 0; border: 2px solid #E8EBF0; }
+            .margin-item { border: none; border-right: 1px solid #E8EBF0; border-bottom: 1px solid #E8EBF0; }
+            .margin-item--featured { grid-column: span 2; order: -1; border-right: none; }
+            .margin-item:nth-child(1) { border-right: 1px solid #E8EBF0; border-bottom: none; }
+            .margin-item:nth-child(3) { border-right: none; border-bottom: none; }
+            .timeline__phases { grid-template-columns: 1fr; padding-left: 60px; }
+            .timeline-phase__marker { position: absolute; left: -60px; top: 0; margin: 0; }
+            .case-study__stats { grid-template-columns: repeat(2, 1fr); }
+        }
+        
+        @media (max-width: 480px) {
+            .hero__stats { flex-direction: column; }
+            .hero__stat:first-child { border-right: none; border-bottom: 2px solid #E8EBF0; }
+        }
+    </style>
+</head>
+<body>
+    <%- include('partials/header') %>
+
+    <!-- Hero Section -->
+    <section class="hero">
+        <div class="container">
+            <div class="hero__content">
+                <p class="hero__label">THE PROBLEM NO ONE TALKS ABOUT</p>
+                <h1 class="hero__title">The country is divided.</h1>
+                <p class="hero__subtitle">But not how you think.</p>
+                
+                <div class="hero__stats">
+                    <div class="hero__stat hero__stat--primary">
+                        <span class="hero__stat-value">94%</span>
+                        <span class="hero__stat-label">OF YOUR SPEND REACHES</span>
+                        <span class="hero__stat-sublabel">HALF YOUR AUDIENCE</span>
+                    </div>
+                    <div class="hero__stat hero__stat--secondary">
+                        <span class="hero__stat-value">6%</span>
+                        <span class="hero__stat-label">OF YOUR SPEND REACHES</span>
+                        <span class="hero__stat-sublabel">THE OTHER HALF</span>
+                    </div>
+                </div>
+                
+                <!-- Audience Divide Visualization -->
+                <div class="audience-divide">
+                    <div class="audience-divide__container">
+                        <div class="audience-divide__grid">
+                            <!-- Left side - oversaturated -->
+                            <div class="voter-half voter-half--saturated">
+                                <div class="voter-half__bar">
+                                    <div class="voter-half__bar-fill" style="width: 94%;">
+                                        <span class="voter-half__value">94%</span>
+                                    </div>
+                                </div>
+                                <div class="voter-half__dots">
+                                    <% for(let i = 0; i < 50; i++) { %>
+                                    <span class="voter-dot voter-dot--active"></span>
+                                    <% } %>
+                                </div>
+                                <div class="voter-half__label">
+                                    <span class="voter-half__label-main">Easy to reach. Cheap to find.</span>
+                                    <span class="voter-half__label-sub">Still customers. Still decision-makers.</span>
+                                </div>
+                            </div>
+                            
+                            <!-- Center divider -->
+                            <div class="audience-divide__center">
+                                <div class="audience-divide__line"></div>
+                                <div class="audience-divide__label">THE DIVIDE</div>
+                            </div>
+                            
+                            <!-- Right side - forgotten -->
+                            <div class="voter-half voter-half--forgotten">
+                                <div class="voter-half__bar">
+                                    <div class="voter-half__bar-fill" style="width: 6%;"></div>
+                                    <span class="voter-half__value">6%</span>
+                                </div>
+                                <div class="voter-half__dots">
+                                    <% for(let i = 0; i < 50; i++) { %>
+                                    <span class="voter-dot"></span>
+                                    <% } %>
+                                </div>
+                                <div class="voter-half__label">
+                                    <span class="voter-half__label-main">Still customers. Still valuable.</span>
+                                    <span class="voter-half__label-sub">Still drive growth.</span>
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <div class="audience-divide__caption">
+                            <p>They're worth <span class="underline-scroll">more than 6% of your investment.</span></p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+    
+    <!-- Insight Section -->
+    <section class="insight" id="insight">
+        <div class="container">
+            <div class="insight__content">
+                <p class="insight__label">THE INVISIBLE ADVANTAGE</p>
+                <h2 class="insight__title">
+                    When Margins Matter,<br>
+                    Precision Is Everything
+                </h2>
+                <p class="insight__text">
+                    <strong>We find the audiences that determine outcomes.</strong> 
+                    In races decided by thousandths of a percent, in markets where every impression counts—we find who others can't.
+                </p>
+                
+                <div class="margin-comparison">
+                    <div class="margin-item">
+                        <span class="margin-item__value">20-30%</span>
+                        <span class="margin-item__label">Consumer Products</span>
+                        <span class="margin-item__context">"Good Enough"</span>
+                    </div>
+                    <div class="margin-item margin-item--featured">
+                        <span class="margin-item__value">0.2%</span>
+                        <span class="margin-item__label">Your Race</span>
+                        <span class="margin-item__context">Life or Death</span>
+                    </div>
+                    <div class="margin-item">
+                        <span class="margin-item__value">10-15%</span>
+                        <span class="margin-item__label">Corporate Boards</span>
+                        <span class="margin-item__context">"Pretty Close"</span>
+                    </div>
+                </div>
+                
+                <p class="insight__emphasis">
+                    We're the experts at the smallest margins on Earth.
+                    <span>537 votes decided a presidency. We find every one.</span>
+                </p>
+            </div>
+        </div>
+    </section>
+
+    <!-- Timeline Section -->
+    <section class="timeline" id="execution">
+        <div class="container">
+            <div class="timeline__header">
+                <p class="timeline__label">HOW WE WON PENNSYLVANIA</p>
+                <h2 class="timeline__title">120-Day Campaign Execution</h2>
+                <p class="timeline__description">From zero to victory in 120 days. The playbook that delivered a 20-point reach advantage.</p>
+            </div>
+            
+            <div class="timeline__container">
+                <div class="timeline__track">
+                    <div class="timeline__progress"></div>
+                </div>
+                
+                <div class="timeline__phases">
+                    <div class="timeline-phase">
+                        <div class="timeline-phase__marker">
+                            <span class="timeline-phase__number">01</span>
+                        </div>
+                        <div class="timeline-phase__card">
+                            <h3 class="timeline-phase__title">Research</h3>
+                            <span class="timeline-phase__days">Pre-Campaign</span>
+                            <ul class="timeline-phase__actions">
+                                <li class="timeline-phase__action"><strong>1.2M</strong> voters analyzed</li>
+                                <li class="timeline-phase__action"><strong>97%</strong> match rate achieved</li>
+                                <li class="timeline-phase__action"><strong>Cross-screen</strong> media plan built</li>
+                            </ul>
+                        </div>
+                    </div>
+                    
+                    <div class="timeline-phase">
+                        <div class="timeline-phase__marker">
+                            <span class="timeline-phase__number">02</span>
+                        </div>
+                        <div class="timeline-phase__card">
+                            <h3 class="timeline-phase__title">Launch</h3>
+                            <span class="timeline-phase__days">Week 1-4</span>
+                            <ul class="timeline-phase__actions">
+                                <li class="timeline-phase__action"><strong>All channels</strong> deployed</li>
+                                <li class="timeline-phase__action"><strong>Broadcast, Cable, CTV, Audio</strong></li>
+                                <li class="timeline-phase__action"><strong>Real-time</strong> tracking active</li>
+                            </ul>
+                        </div>
+                    </div>
+                    
+                    <div class="timeline-phase">
+                        <div class="timeline-phase__marker">
+                            <span class="timeline-phase__number">03</span>
+                        </div>
+                        <div class="timeline-phase__card">
+                            <h3 class="timeline-phase__title">Optimize</h3>
+                            <span class="timeline-phase__days">Week 5-8</span>
+                            <ul class="timeline-phase__actions">
+                                <li class="timeline-phase__action"><strong>35%</strong> missing targets found</li>
+                                <li class="timeline-phase__action"><strong>Retrafficked</strong> unexposed HHs</li>
+                                <li class="timeline-phase__action"><strong>Identity expansion</strong> via clean room</li>
+                            </ul>
+                        </div>
+                    </div>
+                    
+                    <div class="timeline-phase timeline-phase--victory">
+                        <div class="timeline-phase__marker">
+                            <span class="timeline-phase__number">04</span>
+                        </div>
+                        <div class="timeline-phase__card">
+                            <h3 class="timeline-phase__title">Victory</h3>
+                            <span class="timeline-phase__days">Week 9-12</span>
+                            <ul class="timeline-phase__actions">
+                                <li class="timeline-phase__action"><strong>261,847</strong> exclusives</li>
+                                <li class="timeline-phase__action"><strong>80.3%</strong> our reach</li>
+                                <li class="timeline-phase__action"><strong>16,000</strong> vote win</li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Case Study Section -->
+    <section class="case-study" id="case-study">
+        <div class="container">
+            <div class="case-study__header">
+                <p class="case-study__label">THE PROOF: PENNSYLVANIA 2024</p>
+                <h2 class="case-study__title">
+                    Outspent 8-to-1.<br>
+                    Won By Finding the Forgotten Half.
+                </h2>
+            </div>
+            
+            <div class="case-study__stats">
+                <div class="case-stat">
+                    <div class="case-stat__label">Exclusive Voters</div>
+                    <div class="case-stat__value">261,847</div>
+                    <div class="case-stat__sublabel">Found and reached alone</div>
+                </div>
+                <div class="case-stat">
+                    <div class="case-stat__label">Solo Coverage</div>
+                    <div class="case-stat__value">25%</div>
+                    <div class="case-stat__sublabel">Saw only our message</div>
+                </div>
+                <div class="case-stat">
+                    <div class="case-stat__label">Our Total Reach</div>
+                    <div class="case-stat__value">80.3%</div>
+                    <div class="case-stat__sublabel">With 1/8 the budget</div>
+                </div>
+                <div class="case-stat">
+                    <div class="case-stat__label">Their Reach</div>
+                    <div class="case-stat__value">58.9%</div>
+                    <div class="case-stat__sublabel">With 8x spending</div>
+                </div>
+            </div>
+            
+            <div class="case-study__result">
+                <div class="case-study__result-content">
+                    <h3>The 261,847 That Changed Everything</h3>
+                    <p>
+                        <strong>One quarter of our audience saw only our message.</strong> No opponent noise. No saturation. 
+                        In a race decided by 16,000 votes, those 261,847 exclusive impressions weren't just important—they were the difference between victory and defeat.
+                    </p>
+                </div>
+                <div class="case-study__result-metric">
+                    <div class="case-study__result-number">21%</div>
+                    <div class="case-study__result-label">REACH ADVANTAGE</div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Custom Footer for Problem Page with CTA to Technology -->
+    <footer class="footer-bridge" id="contact">
+        <div class="bridge-texture"></div>
+        <div class="container bridge-content">
+            <div class="bridge-headline">
+                <h2 class="bridge-statement">
+                    Hire an Agency That<br>
+                    <span class="bridge-emphasis">Understands Reality</span><br>
+                    & Doesn't Hide From It.
+                </h2>
+                <p class="bridge-subtext">See the system we built to solve this problem.</p>
+            </div>
+            
+            <div class="bridge-cta" style="margin-bottom: 60px;">
+                <a href="/technology" class="bridge-button">
+                    <span>EXPLORE OUR SYSTEM</span>
+                    <svg class="bridge-arrow" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                        <path d="M5 12h14M12 5l7 7-7 7"/>
+                    </svg>
+                </a>
+            </div>
+            
+            <div style="text-align: center; margin-bottom: 40px;">
+                <p class="bridge-note" style="color: rgba(255,255,255,0.6); font-size: 14px;">Or reach us directly: <a href="mailto:info@natmedia.com" style="color: var(--cyan-primary);">info@natmedia.com</a></p>
+            </div>
+            
+            <div class="footer-bottom">
+                <div class="footer-info">
+                    <p class="footer-tag">Founded 1985</p>
+                    <p class="footer-contact"><a href="mailto:info@natmedia.com">info@natmedia.com</a></p>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <script>
+        // Navbar scroll effect
+        window.addEventListener('scroll', () => {
+            const navbar = document.getElementById('navbar');
+            if (window.scrollY > 50) {
+                navbar.classList.add('scrolled');
+            } else {
+                navbar.classList.remove('scrolled');
+            }
+        });
+        
+        // Animate timeline progress bar
+        const timelineObserver = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    const progress = entry.target.querySelector('.timeline__progress');
+                    if (progress) {
+                        progress.style.width = '100%';
+                    }
+                }
+            });
+        }, { threshold: 0.2 });
+        
+        const timelineTrack = document.querySelector('.timeline__track');
+        if (timelineTrack) {
+            timelineObserver.observe(timelineTrack);
+        }
+        
+        // Smooth scroll for anchor links
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function(e) {
+                e.preventDefault();
+                const target = document.querySelector(this.getAttribute('href'));
+                if (target) {
+                    target.scrollIntoView({ behavior: 'smooth', block: 'start' });
+                }
+            });
+        });
+    </script>
+</body>
+</html>
+
+

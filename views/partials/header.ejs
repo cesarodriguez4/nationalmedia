@@ -1,0 +1,20 @@
+<!-- Navigation -->
+<nav id="navbar">
+    <div class="container nav-container">
+        <a href="/" class="logo">
+            <img src="/images/logo.png" alt="National Media" class="logo-image" onerror="this.style.display='none'; this.nextElementSibling.style.display='flex';">
+            <div class="logo-fallback" style="display: none;">
+                <div class="logo-mark"></div>
+                <span>NATIONAL MEDIA</span>
+            </div>
+        </a>
+        <div class="nav-links">
+            <a href="/" class="<%= currentPage === 'home' ? 'active' : '' %>">Our Story</a>
+            <a href="/problem" class="<%= currentPage === 'problem' ? 'active' : '' %>">The Problem</a>
+            <a href="/technology" class="<%= currentPage === 'technology' ? 'active' : '' %>">Our Solution</a>
+        </div>
+        <a href="#contact" class="cta-button nav-cta">LET'S TALK</a>
+    </div>
+</nav>
+
+

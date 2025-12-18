@@ -535,24 +535,35 @@
         
         .service-card {
             background: white;
-            padding: 48px 32px;
-            border: 2px solid var(--gray-200);
+            border: 1px solid var(--gray-200);
+            border-top: 4px solid var(--cyan-primary);
+            padding: 48px;
             transition: all var(--transition-base);
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.02);
+            position: relative;
+            overflow: hidden;
+            z-index: var(--z-card);
+            display: flex;
+            flex-direction: column;
+            min-height: 580px;
         }
         
         .service-card:hover {
-            transform: translateY(-8px);
-            border-color: var(--cyan-primary);
-            box-shadow: 0 20px 40px rgba(0,0,0,0.08);
+            transform: translateY(-8px) scale(1.02);
+            box-shadow: 0 16px 32px rgba(0, 174, 239, 0.08);
+            border-top-color: var(--navy-primary);
+            z-index: var(--z-card-hover);
         }
         
         .service-label {
             font-size: 10px;
             text-transform: uppercase;
             letter-spacing: 0.15em;
-            color: var(--cyan-primary);
+            color: var(--gray-400);
             font-weight: 700;
-            margin-bottom: 12px;
+            margin-bottom: 16px;
+            position: relative;
+            z-index: 2;
         }
         
         .service-card h3 {
@@ -560,34 +571,43 @@
             font-weight: 800;
             color: var(--navy-primary);
             margin-bottom: 12px;
+            position: relative;
+            z-index: 2;
         }
         
         .service-tagline {
-            font-size: 15px;
-            color: var(--gray-600);
-            margin-bottom: 16px;
-            font-weight: 500;
+            font-size: 1rem;
+            font-weight: 600;
+            color: var(--cyan-primary);
+            margin-bottom: 24px;
+            position: relative;
+            z-index: 2;
         }
         
         .service-desc {
             font-size: 14px;
-            color: var(--gray-500);
+            color: var(--gray-600);
             line-height: 1.6;
             margin-bottom: 24px;
+            position: relative;
+            z-index: 2;
         }
         
         .service-features {
             list-style: none;
-            margin-bottom: 32px;
+            padding: 0;
+            position: relative;
+            z-index: 2;
+            flex-grow: 1;
+            margin-bottom: 24px;
         }
         
         .service-features li {
             font-size: 13px;
             color: var(--gray-600);
-            padding: 8px 0;
+            margin-bottom: 12px;
             padding-left: 20px;
             position: relative;
-            border-bottom: 1px solid var(--gray-100);
         }
         
         .service-features li::before {
@@ -598,23 +618,28 @@
         }
         
         .service-metric {
-            display: flex;
-            align-items: baseline;
-            gap: 12px;
+            margin-top: auto;
+            padding-top: 32px;
+            border-top: 1px solid var(--gray-200);
+            text-align: center;
+            position: relative;
+            z-index: 2;
         }
         
         .metric-number {
             font-size: 2rem;
             font-weight: 900;
             color: var(--cyan-primary);
+            display: block;
+            margin-bottom: 8px;
         }
         
         .metric-text {
             font-size: 10px;
-            font-weight: 700;
-            color: var(--gray-500);
             text-transform: uppercase;
             letter-spacing: 0.1em;
+            color: var(--gray-400);
+            font-weight: 600;
         }
         
         .underline-reveal {
@@ -911,52 +936,142 @@
             margin: 0 auto;
         }
         
-        /* Timeline Section */
+        /* Enhanced Timeline Section */
         .timeline-section {
-            padding: 100px 0;
-            background: linear-gradient(180deg, white 0%, #fafbfc 100%);
+            padding: 80px 0;
+            background: white;
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .timeline-section::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-image: 
+                repeating-linear-gradient(
+                    45deg,
+                    transparent,
+                    transparent 90px,
+                    rgba(8, 48, 80, 0.01) 90px,
+                    rgba(8, 48, 80, 0.01) 91px
+                ),
+                repeating-linear-gradient(
+                    -45deg,
+                    transparent,
+                    transparent 90px,
+                    rgba(8, 48, 80, 0.008) 90px,
+                    rgba(8, 48, 80, 0.008) 91px
+                );
+            pointer-events: none;
+            z-index: var(--z-texture);
         }
         
         .timeline-header {
             text-align: center;
-            margin-bottom: 64px;
+            margin-bottom: 80px;
+            position: relative;
+            z-index: var(--z-content);
         }
         
         .timeline-grid {
             display: grid;
-            grid-template-columns: repeat(4, 1fr);
+            grid-template-columns: repeat(3, 1fr);
             gap: 24px;
+            position: relative;
+            z-index: var(--z-card);
         }
         
         .timeline-card {
             background: white;
-            padding: 32px 24px;
-            border: 2px solid var(--gray-200);
-            transition: all var(--transition-base);
+            border: 1px solid var(--gray-200);
+            border-top: 3px solid var(--gray-300);
+            padding: 32px;
+            transition: all 0.6s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+            position: relative;
+            overflow: hidden;
+            z-index: var(--z-card);
+        }
+        
+        .timeline-card.victory {
+            border-top: 4px solid var(--cyan-primary);
+        }
+        
+        .timeline-card.innovation {
+            border-top: 4px solid var(--navy-primary);
+        }
+        
+        .timeline-card.presidential {
+            grid-column: 1 / -1;
+            background: linear-gradient(135deg, #ffffff 0%, #f0f9ff 100%);
+            border: 2px solid var(--cyan-primary);
+            border-top: 6px solid var(--cyan-primary);
+            box-shadow: 0 8px 32px rgba(0, 174, 239, 0.1);
+        }
+        
+        .timeline-card.presidential::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-image: 
+                repeating-linear-gradient(
+                    45deg,
+                    transparent,
+                    transparent 60px,
+                    rgba(0, 174, 239, 0.015) 60px,
+                    rgba(0, 174, 239, 0.015) 61px
+                );
+            pointer-events: none;
+            z-index: 1;
         }
         
         .timeline-card:hover {
-            transform: translateY(-4px);
-            border-color: var(--cyan-primary);
+            transform: translateY(-8px);
+            box-shadow: 0 20px 40px rgba(0, 174, 239, 0.15);
+            z-index: var(--z-card-hover);
         }
         
         .timeline-year {
-            font-size: 2rem;
+            font-size: 2.5rem;
             font-weight: 900;
             color: var(--gray-300);
             margin-bottom: 8px;
+            transition: all 0.6s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+            position: relative;
+            z-index: 2;
+        }
+        
+        .timeline-card.presidential .timeline-year {
+            font-size: 3.5rem;
+            color: var(--cyan-primary);
+        }
+        
+        .timeline-card:hover .timeline-year {
+            color: var(--cyan-primary);
         }
         
         .timeline-badge {
             display: inline-block;
-            font-size: 9px;
-            font-weight: 700;
+            padding: 4px 12px;
+            font-size: 10px;
             text-transform: uppercase;
             letter-spacing: 0.1em;
-            padding: 4px 8px;
-            background: var(--gray-100);
-            color: var(--gray-600);
+            font-weight: 700;
             margin-bottom: 12px;
+            position: relative;
+            z-index: 2;
+            transition: all 0.6s ease;
+        }
+        
+        .timeline-card.innovation .timeline-badge {
+            background: rgba(8, 48, 80, 0.1);
+            color: var(--navy-primary);
         }
         
         .timeline-card.victory .timeline-badge {
@@ -970,39 +1085,100 @@
         }
         
         .timeline-card h4 {
-            font-size: 1rem;
-            font-weight: 700;
+            font-size: 1.25rem;
+            font-weight: 800;
             color: var(--navy-primary);
-            margin-bottom: 8px;
+            margin-bottom: 12px;
+            position: relative;
+            z-index: 2;
+            transition: all 0.6s ease;
         }
         
         .timeline-card p {
-            font-size: 13px;
+            font-size: 14px;
             color: var(--gray-600);
             line-height: 1.5;
+            position: relative;
+            z-index: 2;
+            transition: all 0.6s ease;
         }
         
         .timeline-summary {
+            margin-top: 80px;
+            padding: 48px;
+            background: linear-gradient(135deg, #f8f9fa 0%, #ffffff 100%);
+            border: 1px solid var(--gray-200);
             display: grid;
             grid-template-columns: repeat(4, 1fr);
-            gap: 24px;
-            margin-top: 64px;
-            padding-top: 48px;
-            border-top: 2px solid var(--gray-200);
+            gap: 32px;
+            position: relative;
+            overflow: hidden;
+            z-index: var(--z-card);
+        }
+        
+        .timeline-summary::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-image: 
+                repeating-linear-gradient(
+                    0deg,
+                    transparent,
+                    transparent 60px,
+                    rgba(229, 231, 235, 0.15) 60px,
+                    rgba(229, 231, 235, 0.15) 61px
+                ),
+                repeating-linear-gradient(
+                    90deg,
+                    transparent,
+                    transparent 60px,
+                    rgba(229, 231, 235, 0.15) 60px,
+                    rgba(229, 231, 235, 0.15) 61px
+                );
+            pointer-events: none;
+            z-index: 1;
         }
         
         .summary-stat {
             text-align: center;
+            position: relative;
+            z-index: 2;
+        }
+        
+        .summary-stat.featured {
+            position: relative;
+        }
+        
+        .summary-stat.featured::before {
+            content: '';
+            position: absolute;
+            top: -20px;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 60px;
+            height: 3px;
+            background: var(--cyan-primary);
         }
         
         .summary-stat .stat-num {
+            display: block;
             font-size: 2.5rem;
             font-weight: 900;
-            color: var(--gray-400);
-            display: block;
+            color: var(--navy-primary);
+            margin-bottom: 8px;
+            transition: all 0.3s ease;
         }
         
         .summary-stat.featured .stat-num {
+            color: var(--cyan-primary);
+            font-size: 3rem;
+        }
+        
+        .summary-stat:hover .stat-num {
+            transform: scale(1.1);
             color: var(--cyan-primary);
         }
         
@@ -1015,8 +1191,36 @@
         
         /* Thought Leadership */
         .thought-leadership {
-            padding: 100px 0;
-            background: var(--navy-primary);
+            padding: 80px 0;
+            background: linear-gradient(180deg, #f8f9fa 0%, #ffffff 100%);
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .thought-leadership::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-image: 
+                repeating-linear-gradient(
+                    45deg,
+                    transparent,
+                    transparent 55px,
+                    rgba(107, 114, 128, 0.015) 55px,
+                    rgba(107, 114, 128, 0.015) 56px
+                ),
+                repeating-linear-gradient(
+                    -45deg,
+                    transparent,
+                    transparent 55px,
+                    rgba(0, 174, 239, 0.01) 55px,
+                    rgba(0, 174, 239, 0.01) 56px
+                );
+            pointer-events: none;
+            z-index: 1;
         }
         
         .thought-leadership .section-label {
@@ -1024,91 +1228,227 @@
         }
         
         .thought-leadership .section-title {
-            color: white;
+            color: var(--navy-primary);
         }
         
         .thought-leadership .section-desc {
-            color: rgba(255,255,255,0.7);
+            color: var(--gray-600);
         }
         
         .media-carousel-container {
             position: relative;
             overflow: hidden;
-            margin-top: 48px;
+            margin-top: 64px;
         }
         
         .media-carousel {
             display: flex;
             gap: 32px;
-            transition: transform 0.5s ease;
+            transition: transform 0.5s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+            position: relative;
+            z-index: 10;
         }
         
         .media-card {
             flex: 0 0 calc(33.333% - 22px);
-            background: rgba(255,255,255,0.05);
+            background: white;
             padding: 32px;
-            border: 1px solid rgba(255,255,255,0.1);
+            border: 1px solid var(--gray-200);
+            border-top: 4px solid var(--cyan-primary);
+            transition: all var(--transition-base);
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.02);
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .media-card:hover {
+            transform: translateY(-4px) scale(1.01);
+            box-shadow: 0 16px 32px rgba(0, 174, 239, 0.08);
+            border-top-color: var(--navy-primary);
         }
         
         .media-header {
             display: flex;
-            justify-content: space-between;
-            font-size: 11px;
-            color: var(--cyan-primary);
-            text-transform: uppercase;
-            letter-spacing: 0.1em;
+            gap: 12px;
             margin-bottom: 16px;
+            font-size: 11px;
+            text-transform: uppercase;
+            letter-spacing: 0.05em;
+            font-weight: 600;
+            color: var(--gray-400);
+            position: relative;
+            z-index: 2;
+        }
+        
+        .media-type {
+            color: var(--cyan-primary);
         }
         
         .media-card h3 {
             font-size: 1.25rem;
-            color: white;
+            font-weight: 800;
+            color: var(--navy-primary);
             margin-bottom: 12px;
+            position: relative;
+            z-index: 2;
         }
         
         .media-card > p {
             font-size: 14px;
-            color: rgba(255,255,255,0.7);
-            margin-bottom: 24px;
+            color: var(--gray-600);
+            line-height: 1.5;
+            margin-bottom: 20px;
+            position: relative;
+            z-index: 2;
+        }
+        
+        .media-insights {
+            background: var(--gray-50);
+            padding: 16px;
+            margin-bottom: 20px;
+            position: relative;
+            overflow: hidden;
+            z-index: 2;
+        }
+        
+        .media-insights::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-image: 
+                repeating-linear-gradient(
+                    -45deg,
+                    transparent,
+                    transparent 30px,
+                    rgba(0, 174, 239, 0.02) 30px,
+                    rgba(0, 174, 239, 0.02) 31px
+                );
+            pointer-events: none;
+            z-index: 1;
         }
         
         .media-insights h4 {
-            font-size: 11px;
+            font-size: 12px;
             text-transform: uppercase;
             letter-spacing: 0.1em;
-            color: var(--cyan-primary);
+            font-weight: 700;
+            color: var(--navy-primary);
             margin-bottom: 12px;
+            position: relative;
+            z-index: 2;
         }
         
         .media-insights ul {
             list-style: none;
-            margin-bottom: 24px;
+            padding: 0;
+            position: relative;
+            z-index: 2;
         }
         
         .media-insights li {
             font-size: 13px;
-            color: rgba(255,255,255,0.6);
-            padding: 6px 0;
-            padding-left: 16px;
+            color: var(--gray-600);
+            margin-bottom: 8px;
+            padding-left: 20px;
             position: relative;
         }
         
         .media-insights li::before {
-            content: '→';
+            content: '•';
             position: absolute;
-            left: 0;
+            left: 8px;
             color: var(--cyan-primary);
         }
         
         .media-link {
             color: var(--cyan-primary);
-            font-size: 13px;
+            font-size: 14px;
             font-weight: 600;
             text-decoration: none;
+            transition: gap 300ms ease;
+            display: inline-flex;
+            align-items: center;
+            gap: 4px;
+            position: relative;
+            z-index: 2;
         }
         
-        .media-carousel-nav, .carousel-indicators {
-            display: none;
+        .media-link:hover {
+            gap: 8px;
+        }
+        
+        .media-carousel-nav {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            position: absolute;
+            top: 50%;
+            transform: translateY(-50%);
+            width: calc(100% + 120px);
+            left: -60px;
+            z-index: 50;
+            pointer-events: none;
+        }
+        
+        .carousel-arrow {
+            width: 56px;
+            height: 56px;
+            background: white;
+            border: 3px solid var(--cyan-primary);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            cursor: pointer;
+            transition: all var(--transition-base);
+            pointer-events: all;
+            box-shadow: 0 8px 24px rgba(0, 174, 239, 0.15);
+            font-size: 24px;
+            color: var(--cyan-primary);
+        }
+        
+        .carousel-arrow:hover {
+            background: var(--cyan-primary);
+            color: white;
+            transform: scale(1.15);
+            box-shadow: 0 12px 32px rgba(0, 174, 239, 0.3);
+        }
+        
+        .carousel-arrow.prev {
+            transform: rotate(180deg);
+        }
+        
+        .carousel-arrow.prev:hover {
+            transform: rotate(180deg) scale(1.1);
+        }
+        
+        .carousel-indicators {
+            display: flex;
+            justify-content: center;
+            gap: 8px;
+            margin-top: 32px;
+            z-index: 10;
+        }
+        
+        .indicator {
+            width: 40px;
+            height: 4px;
+            background: var(--gray-300);
+            border-radius: 2px;
+            cursor: pointer;
+            transition: all var(--transition-base);
+        }
+        
+        .indicator:hover {
+            background: var(--gray-400);
+        }
+        
+        .indicator.active {
+            background: var(--cyan-primary);
+            width: 60px;
         }
         
         /* CTA Bridge - Override footer for home page */
@@ -1128,8 +1468,9 @@
             .awards-grid-compressed { grid-template-columns: repeat(2, 1fr); }
             .services-grid { grid-template-columns: 1fr; }
             .capability-grid { grid-template-columns: 1fr; gap: 32px; }
-            .timeline-grid { grid-template-columns: repeat(2, 1fr); }
-            .timeline-summary { grid-template-columns: repeat(2, 1fr); }
+            .timeline-grid { grid-template-columns: 1fr; gap: 20px; }
+            .timeline-card.presidential { grid-column: 1; }
+            .timeline-summary { grid-template-columns: repeat(2, 1fr); gap: 24px; }
             .define-find { min-height: auto; padding: 80px 0; }
         }
         
@@ -1147,6 +1488,58 @@
             .unified-message { padding: 32px 24px; margin-top: 48px; }
             .unified-message h3 { font-size: 1.5rem; }
             .unified-message p { font-size: 15px; }
+            
+            /* Timeline mobile */
+            .timeline-section { padding: 60px 0; }
+            .timeline-header { margin-bottom: 48px; }
+            .timeline-grid { grid-template-columns: 1fr; gap: 16px; }
+            .timeline-card { padding: 24px; }
+            .timeline-card.presidential { border-width: 1px; border-top-width: 4px; }
+            .timeline-year { font-size: 2rem; }
+            .timeline-card.presidential .timeline-year { font-size: 2.5rem; }
+            .timeline-summary { 
+                padding: 32px 20px; 
+                margin-top: 48px;
+                grid-template-columns: repeat(2, 1fr);
+            }
+            .stat-num { font-size: 2rem; }
+            .summary-stat.featured .stat-num { font-size: 2.5rem; }
+            
+            /* Thought Leadership mobile */
+            .thought-leadership { padding: 60px 0; }
+            .thought-leadership .section-title { font-size: 1.75rem; }
+            .thought-leadership .section-desc { font-size: 15px; }
+            .media-carousel-container {
+                overflow-x: auto;
+                -webkit-overflow-scrolling: touch;
+                scroll-snap-type: x mandatory;
+                margin-top: 32px;
+            }
+            .media-carousel {
+                scroll-snap-align: start;
+            }
+            .media-card {
+                scroll-snap-align: center;
+                flex: 0 0 calc(100% - 40px);
+                padding: 24px;
+            }
+            .media-card h3 { font-size: 1.1rem; }
+            .media-carousel-nav { display: none; }
+            .carousel-indicators { margin-top: 24px; }
+            .indicator { width: 30px; background: var(--gray-300); }
+            .indicator.active { width: 45px; }
+        }
+        
+        @media (max-width: 1024px) {
+            .media-card { flex: 0 0 calc(50% - 16px); }
+            .media-carousel-nav { 
+                width: calc(100% + 80px);
+                left: -40px;
+            }
+            .carousel-arrow {
+                width: 48px;
+                height: 48px;
+            }
         }
     </style>
 </head>
@@ -1444,12 +1837,12 @@
             <div class="timeline-header">
                 <p class="section-label">FOUR DECADES OF BREAKTHROUGHS</p>
                 <h2 class="section-title">Built on Victory & Innovation</h2>
-                <p class="section-desc">From founding in 1985 to defining the future of media intelligence.</p>
+                <p class="section-desc">From founding in 1983 to defining the future of media intelligence.</p>
             </div>
 
             <div class="timeline-grid">
                 <div class="timeline-card innovation">
-                    <div class="timeline-year">1985</div>
+                    <div class="timeline-year">1983</div>
                     <span class="timeline-badge">INNOVATION</span>
                     <h4>Founded</h4>
                     <p>National Media established. Beginning of data-driven political advertising.</p>
@@ -1462,11 +1855,46 @@
                     <p>Created Campaign Media Analysis Group - industry standard for ad tracking.</p>
                 </div>
 
+                <div class="timeline-card innovation">
+                    <div class="timeline-year">1996</div>
+                    <span class="timeline-badge">INNOVATION</span>
+                    <h4>Invented Data-Driven Linear</h4>
+                    <p>Revolutionary approach using Scarborough Surveys to select TV programs.</p>
+                </div>
+
                 <div class="timeline-card victory presidential">
                     <div class="timeline-year">2000</div>
                     <span class="timeline-badge">★ PRESIDENTIAL VICTORY</span>
                     <h4>Bush-Cheney 2000</h4>
-                    <p>Florida decided by 537 votes. The beginning of precision politics.</p>
+                    <p>Florida decided by 537 votes. The beginning of precision politics. Every single voter mattered.</p>
+                </div>
+
+                <div class="timeline-card victory presidential">
+                    <div class="timeline-year">2004</div>
+                    <span class="timeline-badge">★ PRESIDENTIAL VICTORY</span>
+                    <h4>Bush-Cheney Re-election</h4>
+                    <p>Ohio decided by 118,000 votes. First modern micro-targeting campaign.</p>
+                </div>
+
+                <div class="timeline-card victory">
+                    <div class="timeline-year">2006</div>
+                    <span class="timeline-badge">VICTORY</span>
+                    <h4>Schwarzenegger Re-election</h4>
+                    <p>California gubernatorial victory. Data-driven targeting in nation's largest state.</p>
+                </div>
+
+                <div class="timeline-card innovation">
+                    <div class="timeline-year">2010</div>
+                    <span class="timeline-badge">INNOVATION</span>
+                    <h4>First Nielsen Panel Match</h4>
+                    <p>Revolutionary integration of voter data with Nielsen measurement.</p>
+                </div>
+
+                <div class="timeline-card victory">
+                    <div class="timeline-year">2014</div>
+                    <span class="timeline-badge">SENATE SWEEP</span>
+                    <h4>GOP Senate Majority</h4>
+                    <p>Flipped CO, AR, NC. Tom Cotton, Cory Gardner, Thom Tillis victories secure control.</p>
                 </div>
 
                 <div class="timeline-card victory presidential">
@@ -1474,6 +1902,13 @@
                     <span class="timeline-badge">★ PRESIDENTIAL VICTORY</span>
                     <h4>Trump 2016</h4>
                     <p>Flipped MI, WI, PA - The Blue Wall. Won by 77,000 votes across three states.</p>
+                </div>
+
+                <div class="timeline-card victory">
+                    <div class="timeline-year">2018</div>
+                    <span class="timeline-badge">VICTORY</span>
+                    <h4>Florida & Missouri Senate</h4>
+                    <p>Rick Scott wins by 0.12%. Josh Hawley defeats McCaskill. Precision in purple states.</p>
                 </div>
 
                 <div class="timeline-card innovation">
@@ -1490,18 +1925,18 @@
                     <p>Privacy-first data collaboration. Match audiences without sharing PII.</p>
                 </div>
 
+                <div class="timeline-card innovation">
+                    <div class="timeline-year">2023</div>
+                    <span class="timeline-badge">INNOVATION</span>
+                    <h4>Voter Informed Contextual</h4>
+                    <p>Revolutionary contextual targeting informed by voter behavior.</p>
+                </div>
+
                 <div class="timeline-card victory">
                     <div class="timeline-year">2024</div>
                     <span class="timeline-badge">VICTORY</span>
                     <h4>Pennsylvania Senate Upset</h4>
-                    <p>McCormick defeats Casey. Found 261,847 voters opponents missed.</p>
-                </div>
-
-                <div class="timeline-card innovation">
-                    <div class="timeline-year">2025</div>
-                    <span class="timeline-badge">INNOVATION</span>
-                    <h4>Six Systems Platform</h4>
-                    <p>Complete integration of all audience intelligence tools.</p>
+                    <p>McCormick defeats Casey. Found 261,847 voters opponents missed. AAPC Upset of the Year.</p>
                 </div>
             </div>
             
@@ -1522,6 +1957,149 @@
                     <span class="stat-num">$3B+</span>
                     <span class="stat-label">MEDIA MANAGED</span>
                 </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Thought Leadership Section -->
+    <section class="thought-leadership" id="media">
+        <div class="container">
+            <div class="section-header">
+                <p class="section-label">THOUGHT LEADERSHIP</p>
+                <h2 class="section-title">Shaping the Industry Conversation</h2>
+                <p class="section-desc">While others talk about yesterday's campaigns, we're defining tomorrow's strategies.</p>
+            </div>
+
+            <div class="media-carousel-container">
+                <div class="media-carousel" id="mediaCarousel">
+                    <div class="media-card">
+                        <div class="media-header">
+                            <span class="media-type">PRO POLITICS PODCAST</span>
+                            <span>AUG 2025</span>
+                        </div>
+                        <h3>10 Findings from New Media Consumption Study</h3>
+                        <p>Adam Wise unveils groundbreaking post-2024 voter behavior analysis. First public reveal of viewing pattern shifts.</p>
+                        <div class="media-insights">
+                            <h4>Key Revelations</h4>
+                            <ul>
+                                <li>Decline of ticket-splitting voters documented</li>
+                                <li>Second-screen viewing now dominant</li>
+                                <li>Direct mail still moves persuadables</li>
+                            </ul>
+                        </div>
+                        <a href="#" class="media-link">Listen on iHeart →</a>
+                    </div>
+
+                    <div class="media-card">
+                        <div class="media-header">
+                            <span class="media-type">REALCLEARPOLITICS</span>
+                            <span>APR 2025</span>
+                        </div>
+                        <h3>Data Revolution in Political Advertising</h3>
+                        <p>"It's like having an NSA for campaigns" - on new tech showing real-time opponent spending.</p>
+                        <div class="media-insights">
+                            <h4>2026 Predictions</h4>
+                            <ul>
+                                <li>Digital budgets hitting 40-50% by midterms</li>
+                                <li>Streaming overtaking broadcast permanently</li>
+                                <li>Podcast advertising becoming tier-1</li>
+                            </ul>
+                        </div>
+                        <a href="#" class="media-link">Watch Interview →</a>
+                    </div>
+
+                    <div class="media-card">
+                        <div class="media-header">
+                            <span class="media-type">CAMPAIGNS & ELECTIONS</span>
+                            <span>APR 2025</span>
+                        </div>
+                        <h3>Kinetiq: "Bloomberg Console for Campaigns"</h3>
+                        <p>National Media & Kinetiq launch real-time competitive intelligence platform.</p>
+                        <div class="media-insights">
+                            <h4>Platform Capabilities</h4>
+                            <ul>
+                                <li>Real-time creative capture</li>
+                                <li>Instant competitor spending alerts</li>
+                                <li>Performance tracking within 2 hours</li>
+                            </ul>
+                        </div>
+                        <a href="#" class="media-link">Access Platform →</a>
+                    </div>
+
+                    <div class="media-card">
+                        <div class="media-header">
+                            <span class="media-type">CYNOPSIS MEDIA</span>
+                            <span>APR 2024</span>
+                        </div>
+                        <h3>First-Party Data Integration Critical for 2024</h3>
+                        <p>Wise stresses campaigns must combine trusted first-party sources like Samba TV for true audience understanding.</p>
+                        <div class="media-insights">
+                            <h4>Integration Strategy</h4>
+                            <ul>
+                                <li>Samba TV real-time viewing data</li>
+                                <li>Cross-device identity resolution</li>
+                                <li>Deterministic measurement standard</li>
+                            </ul>
+                        </div>
+                        <a href="#" class="media-link">Read Analysis →</a>
+                    </div>
+
+                    <div class="media-card">
+                        <div class="media-header">
+                            <span class="media-type">AAPC RECOGNITION</span>
+                            <span>2022</span>
+                        </div>
+                        <h3>Adam Wise Named to 40 Under 40</h3>
+                        <p>Chief Innovation Officer recognized for revolutionizing political media targeting and pioneering voter-informed contextual.</p>
+                        <div class="media-insights">
+                            <h4>Innovation Record</h4>
+                            <ul>
+                                <li>22 Reed Awards for excellence</li>
+                                <li>18 Pollie Awards for innovation</li>
+                                <li>Campaign Excellence winner</li>
+                            </ul>
+                        </div>
+                        <a href="#" class="media-link">View Recognition →</a>
+                    </div>
+
+                    <div class="media-card">
+                        <div class="media-header">
+                            <span class="media-type">COMING SOON</span>
+                            <span>NOV 2025</span>
+                        </div>
+                        <h3>Major Partnership Announcement</h3>
+                        <p>Can't share details yet. Changes everything about audience intelligence for 2026 cycle.</p>
+                        <div class="media-insights">
+                            <h4>What We Can Say</h4>
+                            <ul>
+                                <li>Embargo lifts Tuesday</li>
+                                <li>Revolutionary for down-ballot</li>
+                                <li>10x improvement in match rates</li>
+                            </ul>
+                        </div>
+                        <a href="#" class="media-link">Get Notified →</a>
+                    </div>
+                </div>
+                
+                <div class="media-carousel-nav">
+                    <button class="carousel-arrow prev" onclick="moveCarousel(-1)">
+                        <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                            <path d="M9 18l6-6-6-6"/>
+                        </svg>
+                    </button>
+                    <button class="carousel-arrow next" onclick="moveCarousel(1)">
+                        <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                            <path d="M9 18l6-6-6-6"/>
+                        </svg>
+                    </button>
+                </div>
+            </div>
+            
+            <div class="carousel-indicators" id="carouselIndicators">
+                <div class="indicator active" onclick="goToSlide(0)"></div>
+                <div class="indicator" onclick="goToSlide(1)"></div>
+                <div class="indicator" onclick="goToSlide(2)"></div>
+                <div class="indicator" onclick="goToSlide(3)"></div>
             </div>
         </div>
     </section>
@@ -1548,6 +2126,64 @@
                     target.scrollIntoView({ behavior: 'smooth', block: 'start' });
                 }
             });
+        });
+        
+        // Carousel functionality
+        let currentSlide = 0;
+        
+        function initCarousel() {
+            const carousel = document.getElementById('mediaCarousel');
+            const cards = carousel?.querySelectorAll('.media-card');
+            if (!cards) return;
+            updateCarousel();
+        }
+        
+        function moveCarousel(direction) {
+            const carousel = document.getElementById('mediaCarousel');
+            const cards = carousel?.querySelectorAll('.media-card');
+            if (!cards) return;
+            
+            const visibleCards = window.innerWidth <= 768 ? 1 : window.innerWidth <= 1024 ? 2 : 3;
+            const maxSlide = Math.max(0, cards.length - visibleCards);
+            
+            currentSlide = Math.max(0, Math.min(maxSlide, currentSlide + direction));
+            updateCarousel();
+        }
+        
+        function goToSlide(index) {
+            currentSlide = index;
+            updateCarousel();
+        }
+        
+        function updateCarousel() {
+            const carousel = document.getElementById('mediaCarousel');
+            const indicators = document.querySelectorAll('.indicator');
+            
+            if (!carousel) return;
+            
+            const cardWidth = carousel.querySelector('.media-card')?.offsetWidth || 0;
+            const gap = 32;
+            const offset = -currentSlide * (cardWidth + gap);
+            
+            carousel.style.transform = `translateX(${offset}px)`;
+            
+            indicators.forEach((indicator, i) => {
+                if (i === Math.floor(currentSlide)) {
+                    indicator.classList.add('active');
+                } else {
+                    indicator.classList.remove('active');
+                }
+            });
+        }
+        
+        // Initialize carousel on load
+        document.addEventListener('DOMContentLoaded', initCarousel);
+        
+        // Update carousel on resize
+        let resizeTimer;
+        window.addEventListener('resize', () => {
+            clearTimeout(resizeTimer);
+            resizeTimer = setTimeout(updateCarousel, 250);
         });
     </script>
 </body>

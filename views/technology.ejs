@@ -818,24 +818,34 @@
             line-height: 1.5;
         }
         
-        .cta-button {
-            display: inline-block;
-            padding: 18px 48px;
-            background: linear-gradient(135deg, var(--cyan-primary), var(--cyan-dark));
-            color: white;
-            font-size: 13px;
-            font-weight: 700;
-            text-transform: uppercase;
-            letter-spacing: 0.12em;
-            text-decoration: none;
-            transition: all var(--transition-base);
-            border: none;
-            cursor: pointer;
+        
+        .cta-button::before {
+            content: '';
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            width: 0;
+            height: 0;
+            background: var(--cyan-light);
+            border-radius: 50%;
+            transform: translate(-50%, -50%);
+            transition: all 0.6s var(--ease-out-expo);
+        }
+        
+        .cta-button:hover::before {
+            width: 300%;
+            height: 300%;
         }
         
         .cta-button:hover {
-            transform: translateY(-4px) scale(1.02);
-            box-shadow: 0 16px 32px rgba(0, 174, 239, 0.3);
+            transform: translateY(-3px);
+            box-shadow: 0 12px 30px rgba(64, 196, 255, 0.3);
+            background: var(--cyan-light);
+        }
+        
+        .cta-button span {
+            position: relative;
+            z-index: 1;
         }
         
         /* Responsive */
@@ -862,7 +872,7 @@
             .system-visual { min-height: 320px; padding: 32px; margin: 0 -20px; }
             .cta { padding: 80px 0; }
             .cta-title { font-size: 2rem; }
-            .cta-button { padding: 16px 36px; font-size: 12px; width: 100%; max-width: 280px; }
+            .cta-button { padding: 14px 32px; font-size: 14px; }
         }
     </style>
 </head>
@@ -1311,31 +1321,7 @@
         </div>
     </section>
 
-    <!-- CTA Section -->
-    <section class="cta" id="contact">
-        <div class="container">
-            <div class="cta-content">
-                <h2 class="cta-title">Six Systems Working as One.<br><span class="highlight">Impossible Becomes Inevitable.</span></h2>
-                <p class="cta-description">
-                    When every impression counts and margins are measured in hundreds of votes, 
-                    our technology finds the difference between victory and defeat.
-                </p>
-                <a href="#contact-info" class="cta-button">Schedule a Demo</a>
-            </div>
-        </div>
-    </section>
-    
-    <!-- Contact Footer -->
-    <div id="contact-info" style="background: var(--navy-dark); padding: 60px 0; text-align: center;">
-        <div class="container">
-            <p style="color: rgba(255,255,255,0.7); font-size: 18px; margin-bottom: 16px;">Ready to see our technology in action?</p>
-            <a href="mailto:info@natmedia.com" style="color: var(--cyan-primary); font-size: 24px; font-weight: 700; text-decoration: none;">info@natmedia.com</a>
-            <div style="margin-top: 48px; padding-top: 32px; border-top: 1px solid rgba(255,255,255,0.1);">
-                <p style="color: rgba(255,255,255,0.4); font-size: 12px; text-transform: uppercase; letter-spacing: 0.1em;">Founded 1985</p>
-            <p style="margin-top: 8px;"><a href="mailto:info@natmedia.com" style="color: var(--cyan-primary); text-decoration: none; font-size: 14px;">info@natmedia.com</a></p>
-            </div>
-        </div>
-    </div>
+    <%- include('partials/footer') %>
 
     <script>
         // Navbar scroll effect

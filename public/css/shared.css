@@ -169,7 +169,7 @@ nav.scrolled {
 }
 
 .logo-image {
-    height: 52px;
+    height: 40px;
     width: auto;
 }
 
@@ -246,28 +246,34 @@ nav.scrolled {
     overflow: hidden;
 }
 
-.cta-button::before,
-.nav-cta::before {
+.cta-button::before {
     content: '';
     position: absolute;
     top: 0;
-    left: 0;
+    left: -100%;
     width: 100%;
     height: 100%;
-    background: linear-gradient(135deg, var(--navy-light), var(--navy-primary));
-    opacity: 0;
-    transition: opacity 0.4s var(--spring-smooth);
+    background: var(--cyan-primary);
+    transition: left 0.5s var(--spring-bounce);
 }
 
-.cta-button:hover::before,
-.nav-cta:hover::before {
-    opacity: 1;
+.cta-button:hover::before {
+    left: 0;
 }
 
-.cta-button:hover,
-.nav-cta:hover {
+.cta-button:hover {
     transform: translateY(-2px);
-    box-shadow: 0 10px 25px rgba(8, 48, 80, 0.3);
+    box-shadow: 0 10px 25px rgba(0, 174, 239, 0.25);
+}
+
+/* Disable hover effects for nav CTA button */
+.nav-cta:hover {
+    transform: none !important;
+    box-shadow: none !important;
+}
+
+.nav-cta::before {
+    display: none !important;
 }
 
 .cta-button span,
@@ -459,7 +465,7 @@ nav.scrolled {
     }
     
     .logo-image {
-        height: 44px;
+        height: 32px;
     }
     
     .cta-button,

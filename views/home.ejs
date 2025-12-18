@@ -215,24 +215,11 @@
         .stat-card:hover .stat-label { opacity: 0; transform: translateY(-8px); }
         .stat-card:hover .stat-hover-text { opacity: 0.9; transform: translateY(0); }
         
-        /* Awards Section with Accordion */
+        /* Awards Section */
         .awards-section {
-            padding: 100px 0;
-            background: linear-gradient(180deg, #ffffff 0%, #f8fafc 50%, #ffffff 100%);
+            padding: 80px 0;
+            background: linear-gradient(180deg, #ffffff 0%, #fafbfc 50%, #ffffff 100%);
             position: relative;
-            overflow: hidden;
-        }
-        
-        .awards-section::before {
-            content: '';
-            position: absolute;
-            top: 0;
-            left: 0;
-            right: 0;
-            bottom: 0;
-            background: 
-                radial-gradient(ellipse 100% 60% at 50% 0%, rgba(0, 174, 239, 0.04) 0%, transparent 50%);
-            pointer-events: none;
         }
         
         .awards-header {
@@ -247,27 +234,6 @@
             color: var(--cyan-primary);
             font-weight: 700;
             margin-bottom: 16px;
-            display: inline-block;
-            position: relative;
-        }
-        
-        .section-label::before,
-        .section-label::after {
-            content: '';
-            position: absolute;
-            top: 50%;
-            width: 30px;
-            height: 1px;
-            background: var(--cyan-primary);
-            opacity: 0.4;
-        }
-        
-        .section-label::before {
-            right: calc(100% + 16px);
-        }
-        
-        .section-label::after {
-            left: calc(100% + 16px);
         }
         
         .section-title {
@@ -290,7 +256,7 @@
             grid-template-columns: repeat(3, 1fr);
             gap: 24px;
             max-width: 1000px;
-            margin: 0 auto 40px;
+            margin: 0 auto;
         }
         
         .award-card {
@@ -298,49 +264,15 @@
             padding: 48px 32px;
             text-align: center;
             border: 2px solid var(--gray-200);
-            transition: all 0.4s var(--spring-smooth);
+            transition: all var(--transition-base);
             position: relative;
             overflow: hidden;
-            cursor: pointer;
-        }
-        
-        .award-card::before {
-            content: '';
-            position: absolute;
-            top: 0;
-            left: 0;
-            right: 0;
-            height: 4px;
-            background: linear-gradient(90deg, var(--cyan-primary), var(--cyan-light));
-            transform: scaleX(0);
-            transition: transform 0.4s var(--ease-out-expo);
-        }
-        
-        .award-card::after {
-            content: '';
-            position: absolute;
-            inset: 0;
-            background: linear-gradient(135deg, rgba(0, 174, 239, 0.03) 0%, transparent 50%);
-            opacity: 0;
-            transition: opacity 0.4s ease;
         }
         
         .award-card:hover {
-            transform: translateY(-12px) scale(1.02);
+            transform: translateY(-8px);
             border-color: var(--cyan-primary);
-            box-shadow: 0 24px 48px rgba(0, 174, 239, 0.18);
-        }
-        
-        .award-card:hover::before {
-            transform: scaleX(1);
-        }
-        
-        .award-card:hover::after {
-            opacity: 1;
-        }
-        
-        .award-card:active {
-            transform: translateY(-8px) scale(0.99);
+            box-shadow: 0 20px 40px rgba(0, 174, 239, 0.15);
         }
         
         .award-card-number {
@@ -349,14 +281,6 @@
             color: var(--cyan-primary);
             line-height: 1;
             margin-bottom: 8px;
-            position: relative;
-            z-index: 1;
-            transition: all 0.4s var(--spring-bounce);
-        }
-        
-        .award-card:hover .award-card-number {
-            transform: scale(1.08);
-            text-shadow: 0 4px 20px rgba(0, 174, 239, 0.3);
         }
         
         .award-card-label {
@@ -364,8 +288,6 @@
             font-weight: 700;
             color: var(--navy-primary);
             margin-bottom: 4px;
-            position: relative;
-            z-index: 1;
         }
         
         .award-card-sub {
@@ -373,110 +295,9 @@
             color: var(--gray-500);
             text-transform: uppercase;
             letter-spacing: 0.1em;
-            position: relative;
-            z-index: 1;
         }
         
-        /* Awards Accordion/Expandable Section */
-        .awards-accordion {
-            max-width: 1000px;
-            margin: 0 auto;
-        }
-        
-        .accordion-toggle {
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            gap: 12px;
-            padding: 16px 32px;
-            background: transparent;
-            border: 2px solid var(--gray-200);
-            color: var(--navy-primary);
-            font-size: 14px;
-            font-weight: 600;
-            cursor: pointer;
-            transition: all 0.4s var(--spring-smooth);
-            width: 100%;
-            text-transform: uppercase;
-            letter-spacing: 0.1em;
-        }
-        
-        .accordion-toggle:hover {
-            background: var(--navy-primary);
-            border-color: var(--navy-primary);
-            color: white;
-        }
-        
-        .accordion-toggle:active {
-            transform: scale(0.98);
-        }
-        
-        .accordion-icon {
-            width: 20px;
-            height: 20px;
-            transition: transform 0.4s var(--spring-bounce);
-        }
-        
-        .accordion-toggle.active .accordion-icon {
-            transform: rotate(180deg);
-        }
-        
-        .accordion-content {
-            max-height: 0;
-            overflow: hidden;
-            transition: max-height 0.6s var(--ease-out-expo), padding 0.4s ease;
-        }
-        
-        .accordion-content.expanded {
-            max-height: 800px;
-            padding-top: 32px;
-        }
-        
-        .awards-details-grid {
-            display: grid;
-            grid-template-columns: repeat(2, 1fr);
-            gap: 24px;
-        }
-        
-        .award-detail-card {
-            background: var(--gray-50);
-            padding: 32px;
-            border-left: 3px solid var(--cyan-primary);
-            transition: all 0.4s var(--spring-smooth);
-            opacity: 0;
-            transform: translateY(20px);
-        }
-        
-        .accordion-content.expanded .award-detail-card {
-            opacity: 1;
-            transform: translateY(0);
-        }
-        
-        .accordion-content.expanded .award-detail-card:nth-child(1) { transition-delay: 0.1s; }
-        .accordion-content.expanded .award-detail-card:nth-child(2) { transition-delay: 0.15s; }
-        .accordion-content.expanded .award-detail-card:nth-child(3) { transition-delay: 0.2s; }
-        .accordion-content.expanded .award-detail-card:nth-child(4) { transition-delay: 0.25s; }
-        
-        .award-detail-card:hover {
-            background: white;
-            box-shadow: 0 8px 24px rgba(0, 0, 0, 0.06);
-            transform: translateX(4px);
-        }
-        
-        .award-detail-card h4 {
-            font-size: 15px;
-            font-weight: 700;
-            color: var(--navy-primary);
-            margin-bottom: 8px;
-        }
-        
-        .award-detail-card p {
-            font-size: 13px;
-            color: var(--gray-600);
-            line-height: 1.6;
-        }
-        
-        .award-icon, .award-sparkle, .heat-map-glow, .data-scan, .particle-system, .particle {
+        .award-icon, .award-sparkle, .award-details, .heat-map-glow, .data-scan, .particle-system, .particle {
             display: none;
         }
         
@@ -621,164 +442,46 @@
             font-weight: 600;
         }
         
-        /* Define & Find Section - Dark theme with light cards */
+        /* Define & Find Section */
         .define-find {
-            padding: 120px 0;
-            background: linear-gradient(180deg, var(--navy-dark) 0%, var(--navy-primary) 50%, var(--navy-dark) 100%);
+            padding: 100px 0;
+            background: var(--navy-primary);
             color: white;
-            position: relative;
-            overflow: hidden;
-        }
-        
-        .define-find::before {
-            content: '';
-            position: absolute;
-            top: 0;
-            left: 0;
-            right: 0;
-            bottom: 0;
-            background: 
-                radial-gradient(ellipse 80% 50% at 20% 40%, rgba(0, 174, 239, 0.08) 0%, transparent 50%),
-                radial-gradient(ellipse 60% 40% at 80% 60%, rgba(0, 174, 239, 0.06) 0%, transparent 50%);
-            pointer-events: none;
         }
         
         .define-find .section-label {
             color: var(--cyan-primary);
-            opacity: 0;
-            animation: fadeSlideUp 0.6s ease forwards;
         }
         
         .define-find .section-title {
             color: white;
-            opacity: 0;
-            animation: fadeSlideUp 0.6s ease 0.1s forwards;
         }
         
         .define-find .section-desc {
             color: rgba(255,255,255,0.7);
-            opacity: 0;
-            animation: fadeSlideUp 0.6s ease 0.2s forwards;
-        }
-        
-        @keyframes fadeSlideUp {
-            from {
-                opacity: 0;
-                transform: translateY(20px);
-            }
-            to {
-                opacity: 1;
-                transform: translateY(0);
-            }
         }
         
         .capability-grid {
             display: grid;
             grid-template-columns: repeat(2, 1fr);
-            gap: 32px;
+            gap: 48px;
             margin-top: 64px;
-            position: relative;
-            z-index: 2;
         }
         
         .capability-block {
-            background: white;
-            padding: 40px 36px;
-            border: 1px solid var(--gray-200);
-            border-radius: 2px;
-            position: relative;
-            overflow: hidden;
-            opacity: 0;
-            animation: cardReveal 0.7s ease forwards;
-            transition: all 0.4s var(--spring-smooth);
-            box-shadow: 0 4px 24px rgba(0, 0, 0, 0.08);
-        }
-        
-        .capability-block:nth-child(1) { animation-delay: 0.3s; }
-        .capability-block:nth-child(2) { animation-delay: 0.4s; }
-        
-        @keyframes cardReveal {
-            from {
-                opacity: 0;
-                transform: translateY(40px) scale(0.98);
-            }
-            to {
-                opacity: 1;
-                transform: translateY(0) scale(1);
-            }
-        }
-        
-        .capability-block::before {
-            content: '';
-            position: absolute;
-            top: 0;
-            left: 0;
-            right: 0;
-            height: 3px;
-            background: linear-gradient(90deg, var(--cyan-primary), var(--cyan-light));
-            transform: scaleX(0);
-            transform-origin: left;
-            transition: transform 0.4s var(--ease-out-expo);
-        }
-        
-        .capability-block:hover {
-            transform: translateY(-8px);
-            box-shadow: 0 20px 48px rgba(0, 174, 239, 0.2);
-            border-color: var(--cyan-primary);
-        }
-        
-        .capability-block:hover::before {
-            transform: scaleX(1);
-        }
-        
-        .capability-block:active {
-            transform: translateY(-4px) scale(0.99);
-        }
-        
-        /* Icon container at top of each card */
-        .capability-icon {
-            width: 64px;
-            height: 64px;
-            background: linear-gradient(135deg, rgba(0, 174, 239, 0.1) 0%, rgba(0, 174, 239, 0.05) 100%);
-            border: 2px solid rgba(0, 174, 239, 0.2);
-            border-radius: 12px;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            margin-bottom: 24px;
-            transition: all 0.4s var(--spring-smooth);
-        }
-        
-        .capability-icon svg {
-            width: 28px;
-            height: 28px;
-            color: var(--cyan-primary);
-            transition: all 0.4s var(--spring-smooth);
-        }
-        
-        .capability-block:hover .capability-icon {
-            background: var(--cyan-primary);
-            border-color: var(--cyan-primary);
-            transform: scale(1.05) rotate(3deg);
-        }
-        
-        .capability-block:hover .capability-icon svg {
-            color: white;
-            transform: scale(1.1);
+            background: rgba(255,255,255,0.05);
+            padding: 48px;
+            border: 1px solid rgba(255,255,255,0.1);
         }
         
         .capability-block h3 {
-            font-size: 1.35rem;
-            margin-bottom: 12px;
-            color: var(--navy-primary);
-            font-weight: 800;
+            font-size: 1.5rem;
+            margin-bottom: 16px;
         }
         
         .capability-block p {
-            color: var(--gray-600);
+            color: rgba(255,255,255,0.7);
             margin-bottom: 24px;
-            font-size: 15px;
-            line-height: 1.6;
         }
         
         .capability-features {
@@ -787,76 +490,22 @@
         
         .capability-features li {
             font-size: 14px;
-            padding: 14px 0;
-            padding-left: 28px;
-            border-bottom: 1px solid var(--gray-100);
+            padding: 12px 0;
+            padding-left: 24px;
+            border-bottom: 1px solid rgba(255,255,255,0.1);
             position: relative;
-            color: var(--gray-700);
-            transition: all 0.3s var(--spring-smooth);
-        }
-        
-        .capability-features li:last-child {
-            border-bottom: none;
+            color: rgba(255,255,255,0.8);
         }
         
         .capability-features li::before {
-            content: '';
-            position: absolute;
-            left: 0;
-            top: 50%;
-            transform: translateY(-50%);
-            width: 18px;
-            height: 18px;
-            background: var(--cyan-primary);
-            border-radius: 50%;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            transition: all 0.3s var(--spring-smooth);
-        }
-        
-        .capability-features li::after {
             content: '✓';
             position: absolute;
-            left: 4px;
-            top: 50%;
-            transform: translateY(-50%);
-            font-size: 10px;
-            color: white;
-            font-weight: 700;
-        }
-        
-        .capability-features li:hover {
-            padding-left: 32px;
-            color: var(--navy-primary);
-        }
-        
-        .capability-features li:hover::before {
-            transform: translateY(-50%) scale(1.15);
-            box-shadow: 0 4px 12px rgba(0, 174, 239, 0.4);
+            left: 0;
+            color: var(--cyan-primary);
         }
         
         .highlight-define, .highlight-find {
             color: var(--cyan-primary);
-            position: relative;
-        }
-        
-        .highlight-define::after, .highlight-find::after {
-            content: '';
-            position: absolute;
-            bottom: -2px;
-            left: 0;
-            width: 100%;
-            height: 2px;
-            background: var(--cyan-primary);
-            transform: scaleX(0);
-            transform-origin: left;
-            transition: transform 0.4s var(--ease-out-expo);
-        }
-        
-        .capability-block:hover .highlight-define::after,
-        .capability-block:hover .highlight-find::after {
-            transform: scaleX(1);
         }
         
         .capability-visual, .data-constellation, .constellation-node, .constellation-line, .data-pulse,
@@ -866,39 +515,21 @@
         
         .unified-message {
             text-align: center;
-            margin-top: 80px;
-            padding: 56px 48px;
-            background: linear-gradient(135deg, rgba(0, 174, 239, 0.12) 0%, rgba(0, 174, 239, 0.06) 100%);
-            border: 1px solid rgba(0, 174, 239, 0.25);
-            border-radius: 4px;
-            position: relative;
-            overflow: hidden;
-            opacity: 0;
-            animation: fadeSlideUp 0.7s ease 0.5s forwards;
-        }
-        
-        .unified-message::before {
-            content: '';
-            position: absolute;
-            top: 0;
-            left: 50%;
-            transform: translateX(-50%);
-            width: 80px;
-            height: 3px;
-            background: var(--cyan-primary);
+            margin-top: 64px;
+            padding: 48px;
+            background: rgba(0, 174, 239, 0.1);
+            border: 1px solid rgba(0, 174, 239, 0.2);
         }
         
         .unified-message h3 {
             font-size: 1.5rem;
             margin-bottom: 16px;
-            color: white;
         }
         
         .unified-message p {
             color: rgba(255,255,255,0.8);
             max-width: 700px;
             margin: 0 auto;
-            line-height: 1.7;
         }
         
         /* Timeline Section */
@@ -1111,221 +742,11 @@
             background: var(--cyan-primary);
         }
         
-        /* Global Animation Utilities */
-        .scroll-animate {
-            opacity: 0;
-            transform: translateY(30px);
-            transition: all 0.7s var(--ease-out-expo);
-        }
-        
-        .scroll-animate.animate-in {
-            opacity: 1;
-            transform: translateY(0);
-        }
-        
-        .stagger-animate {
-            opacity: 0;
-            transform: translateY(20px) scale(0.95);
-            animation: staggerReveal 0.6s var(--spring-smooth) forwards;
-        }
-        
-        @keyframes staggerReveal {
-            to {
-                opacity: 1;
-                transform: translateY(0) scale(1);
-            }
-        }
-        
-        /* Ripple Effect */
-        .ripple-effect {
-            position: absolute;
-            border-radius: 50%;
-            background: rgba(255, 255, 255, 0.4);
-            width: 100px;
-            height: 100px;
-            margin-top: -50px;
-            margin-left: -50px;
-            animation: ripple 0.6s ease-out;
-            pointer-events: none;
-        }
-        
-        @keyframes ripple {
-            from {
-                transform: scale(0);
-                opacity: 1;
-            }
-            to {
-                transform: scale(4);
-                opacity: 0;
-            }
-        }
-        
-        /* Enhanced Button States */
-        .btn-primary, .btn-secondary {
-            position: relative;
-            overflow: hidden;
-        }
-        
-        .btn-primary:focus-visible,
-        .btn-secondary:focus-visible {
-            outline: 3px solid var(--cyan-light);
-            outline-offset: 3px;
-        }
-        
-        .btn-primary:active {
-            transform: translateY(-1px) scale(0.98);
-        }
-        
-        .btn-secondary:active {
-            transform: translateY(-1px) scale(0.98);
-        }
-        
-        /* Service Card Enhanced Hover */
-        .service-card {
-            position: relative;
-            overflow: hidden;
-        }
-        
-        .service-card::before {
-            content: '';
-            position: absolute;
-            top: 0;
-            left: 0;
-            right: 0;
-            height: 4px;
-            background: linear-gradient(90deg, var(--cyan-primary), var(--cyan-light));
-            transform: scaleX(0);
-            transform-origin: left;
-            transition: transform 0.5s var(--ease-out-expo);
-        }
-        
-        .service-card:hover::before {
-            transform: scaleX(1);
-        }
-        
-        .service-card:active {
-            transform: translateY(-4px) scale(0.99);
-        }
-        
-        /* Timeline Card Enhanced Hover */
-        .timeline-card {
-            position: relative;
-            overflow: hidden;
-        }
-        
-        .timeline-card::after {
-            content: '';
-            position: absolute;
-            bottom: 0;
-            left: 0;
-            width: 100%;
-            height: 3px;
-            background: var(--cyan-primary);
-            transform: scaleX(0);
-            transform-origin: center;
-            transition: transform 0.4s var(--ease-out-expo);
-        }
-        
-        .timeline-card:hover::after {
-            transform: scaleX(1);
-        }
-        
-        .timeline-card:hover .timeline-year {
-            color: var(--cyan-primary);
-            transition: color 0.3s ease;
-        }
-        
-        .timeline-card:active {
-            transform: translateY(-2px) scale(0.99);
-        }
-        
-        /* Media Card Enhanced Hover */
-        .media-card {
-            position: relative;
-            overflow: hidden;
-            transition: all 0.5s var(--spring-smooth);
-        }
-        
-        .media-card::before {
-            content: '';
-            position: absolute;
-            top: 0;
-            left: 0;
-            width: 4px;
-            height: 0;
-            background: var(--cyan-primary);
-            transition: height 0.4s var(--ease-out-expo);
-        }
-        
-        .media-card:hover {
-            transform: translateY(-8px);
-            background: rgba(255,255,255,0.08);
-            border-color: rgba(0, 174, 239, 0.3);
-        }
-        
-        .media-card:hover::before {
-            height: 100%;
-        }
-        
-        /* Logo Item Hover Enhancement */
-        .logo-item {
-            position: relative;
-            transition: all 0.3s var(--spring-smooth);
-        }
-        
-        .logo-item::after {
-            content: '';
-            position: absolute;
-            bottom: -4px;
-            left: 50%;
-            width: 0;
-            height: 2px;
-            background: var(--cyan-primary);
-            transition: all 0.3s var(--ease-out-expo);
-            transform: translateX(-50%);
-        }
-        
-        .logo-item:hover::after {
-            width: 100%;
-        }
-        
-        .logo-item:hover {
-            transform: translateY(-2px);
-        }
-        
-        /* Summary Stat Hover */
-        .summary-stat {
-            transition: all 0.4s var(--spring-smooth);
-            padding: 16px;
-            border-radius: 4px;
-        }
-        
-        .summary-stat:hover {
-            background: rgba(0, 174, 239, 0.05);
-            transform: translateY(-4px);
-        }
-        
-        .summary-stat:hover .stat-num {
-            color: var(--cyan-primary);
-        }
-        
-        /* Unified Message Hover */
-        .unified-message {
-            transition: all 0.5s var(--spring-smooth);
-        }
-        
-        .unified-message:hover {
-            transform: translateY(-4px);
-            box-shadow: 0 20px 40px rgba(0, 174, 239, 0.15);
-            border-color: rgba(0, 174, 239, 0.4);
-        }
-        
         /* Responsive */
         @media (max-width: 1024px) {
             .hero-grid { grid-template-columns: 1fr; gap: 48px; }
             .stats-grid { max-width: 100%; }
             .awards-grid-compressed { grid-template-columns: repeat(2, 1fr); }
-            .awards-details-grid { grid-template-columns: 1fr; }
             .services-grid { grid-template-columns: 1fr; }
             .capability-grid { grid-template-columns: 1fr; }
             .timeline-grid { grid-template-columns: repeat(2, 1fr); }
@@ -1338,8 +759,6 @@
             .hero-buttons { flex-direction: column; }
             .awards-grid-compressed { grid-template-columns: 1fr; }
             .media-card { flex: 0 0 100%; }
-            .capability-block { padding: 32px 24px; }
-            .capability-icon { width: 56px; height: 56px; }
         }
     </style>
 </head>
@@ -1423,36 +842,6 @@
                     <div class="award-card-sub">Technology Leadership</div>
                 </div>
             </div>
-            
-            <!-- Awards Accordion -->
-            <div class="awards-accordion">
-                <button class="accordion-toggle" id="awardsToggle" aria-expanded="false" aria-controls="awardsContent">
-                    <span>View Award Details</span>
-                    <svg class="accordion-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
-                        <polyline points="6 9 12 15 18 9"></polyline>
-                    </svg>
-                </button>
-                <div class="accordion-content" id="awardsContent">
-                    <div class="awards-details-grid">
-                        <div class="award-detail-card">
-                            <h4>🏆 Best Use of Data & Analytics</h4>
-                            <p>Recognized for pioneering voter modeling techniques that identified 261,000+ persuadable voters in the Pennsylvania Senate race.</p>
-                        </div>
-                        <div class="award-detail-card">
-                            <h4>🎯 CTV Innovation Award</h4>
-                            <p>Industry-leading 86% household match rate - 24 points above the standard. Precision targeting across streaming platforms.</p>
-                        </div>
-                        <div class="award-detail-card">
-                            <h4>📊 Best Media Strategy</h4>
-                            <p>Cross-channel campaign optimization delivering measurable ROI improvements averaging 34% over traditional approaches.</p>
-                        </div>
-                        <div class="award-detail-card">
-                            <h4>🔒 Privacy Leadership</h4>
-                            <p>Clean room technology implementation enabling privacy-compliant data collaboration without exposing PII.</p>
-                        </div>
-                    </div>
-                </div>
-            </div>
         </div>
     </section>
 
@@ -1498,15 +887,6 @@
             
             <div class="capability-grid">
                 <div class="capability-block">
-                    <div class="capability-icon">
-                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-                            <circle cx="12" cy="8" r="4"/>
-                            <circle cx="6" cy="18" r="3"/>
-                            <circle cx="18" cy="18" r="3"/>
-                            <line x1="12" y1="12" x2="6" y2="15"/>
-                            <line x1="12" y1="12" x2="18" y2="15"/>
-                        </svg>
-                    </div>
                     <h3><span class="highlight-define">Define</span> Your Audience</h3>
                     <p>Every campaign starts with precision. We don't guess who matters - we know.</p>
                     <ul class="capability-features">
@@ -1519,17 +899,6 @@
                 </div>
                 
                 <div class="capability-block">
-                    <div class="capability-icon">
-                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-                            <circle cx="12" cy="12" r="3"/>
-                            <circle cx="12" cy="12" r="7" stroke-dasharray="4 2"/>
-                            <circle cx="12" cy="12" r="10" stroke-dasharray="2 3"/>
-                            <line x1="12" y1="2" x2="12" y2="5"/>
-                            <line x1="12" y1="19" x2="12" y2="22"/>
-                            <line x1="2" y1="12" x2="5" y2="12"/>
-                            <line x1="19" y1="12" x2="22" y2="12"/>
-                        </svg>
-                    </div>
                     <h3><span class="highlight-find">Find</span> Them Everywhere</h3>
                     <p>Your audience isn't in one place. Neither are we. Complete reach across every screen.</p>
                     <ul class="capability-features">
@@ -1726,73 +1095,6 @@
                 if (target) {
                     target.scrollIntoView({ behavior: 'smooth', block: 'start' });
                 }
-            });
-        });
-        
-        // Awards Accordion Toggle
-        const awardsToggle = document.getElementById('awardsToggle');
-        const awardsContent = document.getElementById('awardsContent');
-        
-        if (awardsToggle && awardsContent) {
-            awardsToggle.addEventListener('click', () => {
-                const isExpanded = awardsToggle.classList.toggle('active');
-                awardsContent.classList.toggle('expanded');
-                awardsToggle.setAttribute('aria-expanded', isExpanded);
-                
-                // Update button text
-                const buttonText = awardsToggle.querySelector('span');
-                if (buttonText) {
-                    buttonText.textContent = isExpanded ? 'Hide Award Details' : 'View Award Details';
-                }
-            });
-        }
-        
-        // Scroll-triggered animations using Intersection Observer
-        const observerOptions = {
-            threshold: 0.15,
-            rootMargin: '0px 0px -50px 0px'
-        };
-        
-        const animationObserver = new IntersectionObserver((entries) => {
-            entries.forEach(entry => {
-                if (entry.isIntersecting) {
-                    entry.target.classList.add('animate-in');
-                    animationObserver.unobserve(entry.target);
-                }
-            });
-        }, observerOptions);
-        
-        // Observe elements for scroll animations
-        document.querySelectorAll('.award-card, .service-card, .timeline-card, .media-card').forEach(el => {
-            el.classList.add('scroll-animate');
-            animationObserver.observe(el);
-        });
-        
-        // Add ripple effect on button clicks
-        document.querySelectorAll('.btn-primary, .btn-secondary, .accordion-toggle, .bridge-button').forEach(button => {
-            button.addEventListener('click', function(e) {
-                const ripple = document.createElement('span');
-                ripple.classList.add('ripple-effect');
-                const rect = this.getBoundingClientRect();
-                const x = e.clientX - rect.left;
-                const y = e.clientY - rect.top;
-                ripple.style.left = x + 'px';
-                ripple.style.top = y + 'px';
-                this.appendChild(ripple);
-                setTimeout(() => ripple.remove(), 600);
-            });
-        });
-        
-        // Staggered animation for stat cards on load
-        document.querySelectorAll('.stat-card').forEach((card, index) => {
-            card.style.animationDelay = `${0.4 + (index * 0.1)}s`;
-            card.classList.add('stagger-animate');
-        });
-        
-        // Award card hover sound feedback (haptic substitute)
-        document.querySelectorAll('.award-card').forEach(card => {
-            card.addEventListener('mouseenter', () => {
-                card.style.transition = 'all 0.4s cubic-bezier(0.34, 1.56, 0.64, 1)';
             });
         });
     </script>

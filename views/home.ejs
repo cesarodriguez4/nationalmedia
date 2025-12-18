@@ -220,6 +220,43 @@
             padding: 80px 0;
             background: linear-gradient(180deg, #ffffff 0%, #fafbfc 50%, #ffffff 100%);
             position: relative;
+            overflow: hidden;
+        }
+        
+        /* Data Scan Animation */
+        .data-scan {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 2px;
+            background: linear-gradient(90deg, 
+                transparent 0%,
+                rgba(0, 174, 239, 0.15) 20%,
+                rgba(0, 174, 239, 0.3) 50%,
+                rgba(0, 174, 239, 0.15) 80%,
+                transparent 100%);
+            box-shadow: 0 0 15px rgba(0, 174, 239, 0.2), 0 0 30px rgba(0, 174, 239, 0.1);
+            opacity: 0;
+            animation: dataScan 6s linear infinite;
+            z-index: 1;
+        }
+        
+        @keyframes dataScan {
+            0% {
+                top: 0%;
+                opacity: 0;
+            }
+            5% {
+                opacity: 1;
+            }
+            95% {
+                opacity: 1;
+            }
+            100% {
+                top: 100%;
+                opacity: 0;
+            }
         }
         
         .awards-header {
@@ -260,80 +297,223 @@
         }
         
         .award-card {
-            background: white;
-            padding: 48px 32px;
+            background: linear-gradient(135deg, #ffffff 0%, #fcfcfd 100%);
+            padding: 36px 24px;
             text-align: center;
-            border: 2px solid var(--gray-200);
+            border: 1px solid var(--gray-200);
             transition: all var(--transition-base);
             position: relative;
             overflow: hidden;
+            box-shadow: 
+                inset 0 1px 2px rgba(255, 255, 255, 0.9),
+                0 1px 2px rgba(0, 0, 0, 0.02),
+                0 4px 8px rgba(0, 0, 0, 0.03),
+                0 16px 32px rgba(0, 0, 0, 0.02);
+        }
+        
+        .award-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            height: 4px;
+            background: linear-gradient(90deg, var(--cyan-primary), var(--cyan-dark));
+            transform: scaleX(0);
+            transform-origin: left;
+            transition: transform var(--transition-base);
+        }
+        
+        .award-card:hover::before {
+            transform: scaleX(1);
         }
         
         .award-card:hover {
-            transform: translateY(-8px);
+            transform: translateY(-16px) scale(1.02);
             border-color: var(--cyan-primary);
-            box-shadow: 0 20px 40px rgba(0, 174, 239, 0.15);
+            box-shadow: 0 20px 40px rgba(0, 174, 239, 0.12);
+        }
+        
+        .award-icon {
+            position: absolute;
+            top: 20px;
+            right: 20px;
+            width: 40px;
+            height: 40px;
+        }
+        
+        .award-sparkle {
+            position: absolute;
+            width: 4px;
+            height: 4px;
+            background: var(--cyan-primary);
+            border-radius: 50%;
+            animation: sparkle 2s ease-in-out infinite;
+        }
+        
+        .award-sparkle:nth-child(1) { top: 0; left: 50%; animation-delay: 0s; }
+        .award-sparkle:nth-child(2) { top: 50%; right: 0; animation-delay: 0.3s; }
+        .award-sparkle:nth-child(3) { bottom: 0; left: 0; animation-delay: 0.6s; }
+        
+        @keyframes sparkle {
+            0%, 100% { opacity: 0; transform: scale(0); }
+            50% { opacity: 1; transform: scale(1); }
         }
         
         .award-card-number {
-            font-size: 4rem;
-            font-weight: 900;
-            color: var(--cyan-primary);
+            font-size: 3rem;
+            font-weight: 800;
+            color: var(--navy-primary);
             line-height: 1;
             margin-bottom: 8px;
+            transition: all var(--transition-base);
+            position: relative;
+            z-index: 2;
+        }
+        
+        .award-card:hover .award-card-number {
+            color: var(--cyan-primary);
+            transform: translateY(-4px) scale(1.05);
         }
         
         .award-card-label {
-            font-size: 16px;
+            font-size: 13px;
             font-weight: 700;
+            text-transform: uppercase;
+            letter-spacing: 0.1em;
             color: var(--navy-primary);
-            margin-bottom: 4px;
+            margin-bottom: 6px;
+            position: relative;
+            z-index: 2;
         }
         
         .award-card-sub {
-            font-size: 12px;
+            font-size: 11px;
             color: var(--gray-500);
-            text-transform: uppercase;
-            letter-spacing: 0.1em;
+            font-weight: 500;
+            margin-bottom: 0;
+            position: relative;
+            z-index: 2;
         }
         
-        .award-icon, .award-sparkle, .award-details, .heat-map-glow, .data-scan, .particle-system, .particle {
+        .award-details {
+            opacity: 0;
+            max-height: 0;
+            overflow: hidden;
+            transition: all 600ms cubic-bezier(0.34, 1.56, 0.64, 1);
+            margin-top: 0;
+            position: relative;
+            z-index: 2;
+        }
+        
+        .award-card:hover .award-details {
+            opacity: 1;
+            max-height: 400px;
+            margin-top: 24px;
+        }
+        
+        .award-details ul {
+            list-style: none;
+            padding: 0;
+            margin: 0;
+            font-size: 12px;
+            letter-spacing: -0.02em;
+            line-height: 1.8;
+            text-align: left;
+            color: var(--gray-700);
+        }
+        
+        .award-details li {
+            padding: 6px 0;
+            padding-left: 20px;
+            position: relative;
+        }
+        
+        .award-details li:before {
+            content: "→";
+            position: absolute;
+            left: 0;
+            color: var(--cyan-primary);
+            font-weight: 700;
+        }
+        
+        .heat-map-glow, .particle-system, .particle {
             display: none;
         }
         
         /* Trust Section */
         .trust-section {
-            padding: 60px 0;
-            background: var(--navy-primary);
-            text-align: center;
+            padding: 25px 0;
+            background: white;
+            border-top: 1px solid var(--gray-200);
+            border-bottom: 1px solid var(--gray-200);
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .trust-section::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-image: 
+                repeating-linear-gradient(
+                    0deg,
+                    transparent,
+                    transparent 100px,
+                    rgba(229, 231, 235, 0.35) 100px,
+                    rgba(229, 231, 235, 0.35) 101px
+                ),
+                repeating-linear-gradient(
+                    90deg,
+                    transparent,
+                    transparent 100px,
+                    rgba(229, 231, 235, 0.35) 100px,
+                    rgba(229, 231, 235, 0.35) 101px
+                );
+            pointer-events: none;
+            z-index: 1;
         }
         
         .trust-label {
             font-size: 10px;
             text-transform: uppercase;
             letter-spacing: 0.2em;
-            color: rgba(255,255,255,0.5);
-            font-weight: 600;
-            margin-bottom: 24px;
+            color: var(--gray-500);
+            font-weight: 700;
+            text-align: center;
+            margin-bottom: 16px;
+            position: relative;
+            z-index: 10;
         }
         
         .client-logos {
             display: flex;
-            flex-wrap: wrap;
             justify-content: center;
-            gap: 32px;
+            align-items: center;
+            gap: 28px;
+            flex-wrap: wrap;
+            margin-bottom: 20px;
+            position: relative;
+            z-index: 10;
         }
         
         .logo-item {
-            font-size: 14px;
+            font-size: 16px;
             font-weight: 700;
-            color: rgba(255,255,255,0.7);
-            padding: 8px 16px;
-            transition: color var(--transition-fast);
+            color: var(--gray-400);
+            transition: all 300ms ease;
+            cursor: pointer;
+            position: relative;
+            padding: 8px 12px;
+            letter-spacing: 0.02em;
         }
         
         .logo-item:hover {
-            color: var(--cyan-primary);
+            color: var(--navy-primary);
+            transform: translateY(-2px);
         }
         
         /* Services Section */
@@ -445,42 +625,88 @@
         /* Define & Find Section */
         .define-find {
             padding: 100px 0;
-            background: var(--navy-primary);
-            color: white;
+            background: linear-gradient(135deg, #ffffff 0%, #f0f9ff 50%, #ffffff 100%);
+            position: relative;
+            overflow: hidden;
+            min-height: 100vh;
+            display: flex;
+            align-items: center;
+        }
+        
+        .define-find::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-image: 
+                repeating-linear-gradient(45deg, transparent, transparent 60px, rgba(2, 132, 199, 0.02) 60px, rgba(2, 132, 199, 0.02) 61px),
+                repeating-linear-gradient(-45deg, transparent, transparent 60px, rgba(8, 48, 80, 0.015) 60px, rgba(8, 48, 80, 0.015) 61px);
+            pointer-events: none;
+            opacity: 0.5;
         }
         
         .define-find .section-label {
+            display: inline-block;
+            font-size: 11px;
             color: var(--cyan-primary);
+            font-weight: 700;
+            letter-spacing: 0.2em;
+            text-transform: uppercase;
+            margin-bottom: 24px;
+            padding: 8px 20px;
+            background: rgba(0, 174, 239, 0.08);
+            border: 1px solid rgba(0, 174, 239, 0.2);
         }
         
         .define-find .section-title {
-            color: white;
+            color: var(--navy-primary);
         }
         
         .define-find .section-desc {
-            color: rgba(255,255,255,0.7);
+            font-size: 20px;
+            color: var(--gray-600);
+            line-height: 1.5;
+            max-width: 800px;
+            margin: 0 auto;
         }
         
         .capability-grid {
             display: grid;
             grid-template-columns: repeat(2, 1fr);
             gap: 48px;
-            margin-top: 64px;
+            margin-top: 80px;
+            position: relative;
+            z-index: 10;
         }
         
         .capability-block {
-            background: rgba(255,255,255,0.05);
+            background: white;
             padding: 48px;
-            border: 1px solid rgba(255,255,255,0.1);
+            border: 2px solid var(--gray-200);
+            position: relative;
+            transition: all var(--transition-base);
+            overflow: hidden;
+        }
+        
+        .capability-block:hover {
+            transform: translateY(-8px);
+            box-shadow: 0 20px 40px rgba(0, 174, 239, 0.1);
+            border-color: var(--cyan-primary);
         }
         
         .capability-block h3 {
-            font-size: 1.5rem;
+            font-size: 1.75rem;
+            font-weight: 800;
+            color: var(--navy-primary);
             margin-bottom: 16px;
         }
         
         .capability-block p {
-            color: rgba(255,255,255,0.7);
+            font-size: 16px;
+            color: var(--gray-600);
+            line-height: 1.6;
             margin-bottom: 24px;
         }
         
@@ -490,45 +716,198 @@
         
         .capability-features li {
             font-size: 14px;
-            padding: 12px 0;
+            color: var(--gray-600);
+            margin-bottom: 12px;
             padding-left: 24px;
-            border-bottom: 1px solid rgba(255,255,255,0.1);
             position: relative;
-            color: rgba(255,255,255,0.8);
         }
         
         .capability-features li::before {
-            content: '✓';
+            content: '→';
             position: absolute;
             left: 0;
             color: var(--cyan-primary);
+            font-weight: 700;
         }
         
-        .highlight-define, .highlight-find {
+        .highlight-define {
+            color: var(--navy-primary);
+            font-weight: 900;
+            position: relative;
+            display: inline-block;
+        }
+        
+        .highlight-define::after {
+            content: '';
+            position: absolute;
+            bottom: -4px;
+            left: 0;
+            width: 100%;
+            height: 3px;
+            background: var(--navy-primary);
+        }
+        
+        .highlight-find {
             color: var(--cyan-primary);
+            font-weight: 900;
+            position: relative;
+            display: inline-block;
         }
         
-        .capability-visual, .data-constellation, .constellation-node, .constellation-line, .data-pulse,
-        .signal-wave-container, .signal-wave, .signal-center, .signal-core {
-            display: none;
+        .highlight-find::after {
+            content: '';
+            position: absolute;
+            bottom: -4px;
+            left: 0;
+            width: 100%;
+            height: 3px;
+            background: var(--cyan-primary);
+        }
+        
+        /* Capability Visuals */
+        .capability-visual {
+            width: 100%;
+            height: 120px;
+            margin-bottom: 32px;
+            position: relative;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+        
+        /* Data Constellation Visual */
+        .data-constellation {
+            width: 180px;
+            height: 100px;
+            position: relative;
+        }
+        
+        .constellation-node {
+            position: absolute;
+            width: 8px;
+            height: 8px;
+            background: var(--cyan-primary);
+            border-radius: 50%;
+            box-shadow: 0 0 20px rgba(0, 174, 239, 0.5);
+            animation: nodePulse 3s ease-in-out infinite;
+        }
+        
+        .constellation-node:nth-child(odd) {
+            animation-delay: 0.5s;
+        }
+        
+        .constellation-line {
+            position: absolute;
+            height: 1px;
+            background: linear-gradient(90deg, transparent, var(--cyan-primary), transparent);
+            opacity: 0.3;
+            animation: lineGlow 4s ease-in-out infinite;
+        }
+        
+        @keyframes nodePulse {
+            0%, 100% { transform: scale(1); opacity: 0.8; }
+            50% { transform: scale(1.3); opacity: 1; }
+        }
+        
+        @keyframes lineGlow {
+            0%, 100% { opacity: 0.2; }
+            50% { opacity: 0.6; }
+        }
+        
+        .data-pulse {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            width: 60px;
+            height: 60px;
+            border-radius: 50%;
+            border: 2px solid var(--cyan-primary);
+            animation: pulseRing 2s ease-out infinite;
+        }
+        
+        @keyframes pulseRing {
+            0% { transform: translate(-50%, -50%) scale(0.5); opacity: 1; }
+            100% { transform: translate(-50%, -50%) scale(2); opacity: 0; }
+        }
+        
+        /* Signal Wave Visual */
+        .signal-wave-container {
+            width: 180px;
+            height: 100px;
+            position: relative;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+        
+        .signal-wave {
+            position: absolute;
+            border: 2px solid var(--cyan-primary);
+            border-radius: 50%;
+            opacity: 0;
+            animation: signalExpand 3s ease-out infinite;
+        }
+        
+        .signal-wave-1 { width: 40px; height: 40px; animation-delay: 0s; }
+        .signal-wave-2 { width: 40px; height: 40px; animation-delay: 1s; }
+        .signal-wave-3 { width: 40px; height: 40px; animation-delay: 2s; }
+        
+        @keyframes signalExpand {
+            0% { transform: scale(1); opacity: 1; }
+            100% { transform: scale(4); opacity: 0; }
+        }
+        
+        .signal-center {
+            position: relative;
+            width: 40px;
+            height: 40px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+        
+        .signal-core {
+            width: 12px;
+            height: 12px;
+            background: var(--cyan-primary);
+            border-radius: 50%;
+            box-shadow: 0 0 20px rgba(0, 174, 239, 0.8), 0 0 40px rgba(0, 174, 239, 0.4);
+            animation: corePulse 2s ease-in-out infinite;
+        }
+        
+        @keyframes corePulse {
+            0%, 100% { 
+                transform: scale(1);
+                box-shadow: 0 0 20px rgba(0, 174, 239, 0.8), 0 0 40px rgba(0, 174, 239, 0.4);
+            }
+            50% { 
+                transform: scale(1.2);
+                box-shadow: 0 0 30px rgba(0, 174, 239, 1), 0 0 60px rgba(0, 174, 239, 0.6);
+            }
         }
         
         .unified-message {
             text-align: center;
-            margin-top: 64px;
-            padding: 48px;
-            background: rgba(0, 174, 239, 0.1);
-            border: 1px solid rgba(0, 174, 239, 0.2);
+            margin-top: 80px;
+            padding: 56px;
+            background: white;
+            border: 3px solid var(--cyan-primary);
+            position: relative;
+            z-index: 10;
         }
         
         .unified-message h3 {
-            font-size: 1.5rem;
+            font-size: 2rem;
+            font-weight: 900;
+            color: var(--navy-primary);
             margin-bottom: 16px;
         }
         
         .unified-message p {
-            color: rgba(255,255,255,0.8);
-            max-width: 700px;
+            font-size: 18px;
+            color: var(--gray-600);
+            max-width: 800px;
             margin: 0 auto;
         }
         
@@ -748,9 +1127,10 @@
             .stats-grid { max-width: 100%; }
             .awards-grid-compressed { grid-template-columns: repeat(2, 1fr); }
             .services-grid { grid-template-columns: 1fr; }
-            .capability-grid { grid-template-columns: 1fr; }
+            .capability-grid { grid-template-columns: 1fr; gap: 32px; }
             .timeline-grid { grid-template-columns: repeat(2, 1fr); }
             .timeline-summary { grid-template-columns: repeat(2, 1fr); }
+            .define-find { min-height: auto; padding: 80px 0; }
         }
         
         @media (max-width: 768px) {
@@ -759,6 +1139,14 @@
             .hero-buttons { flex-direction: column; }
             .awards-grid-compressed { grid-template-columns: 1fr; }
             .media-card { flex: 0 0 100%; }
+            .define-find { padding: 60px 0; }
+            .define-find .section-desc { font-size: 16px; }
+            .capability-block { padding: 32px 24px; }
+            .capability-block h3 { font-size: 1.5rem; }
+            .capability-visual { height: 80px; margin-bottom: 24px; }
+            .unified-message { padding: 32px 24px; margin-top: 48px; }
+            .unified-message h3 { font-size: 1.5rem; }
+            .unified-message p { font-size: 15px; }
         }
     </style>
 </head>
@@ -816,6 +1204,7 @@
 
     <!-- Awards Section -->
     <section class="awards-section">
+        <div class="data-scan"></div>
         <div class="container">
             <div class="awards-header">
                 <p class="section-label">INDUSTRY RECOGNITION</p>
@@ -825,21 +1214,61 @@
             
             <div class="awards-grid-compressed">
                 <div class="award-card">
+                    <div class="award-icon">
+                        <div class="award-sparkle"></div>
+                        <div class="award-sparkle"></div>
+                        <div class="award-sparkle"></div>
+                    </div>
                     <div class="award-card-number">22</div>
                     <div class="award-card-label">Reed Awards</div>
                     <div class="award-card-sub">Political Excellence</div>
+                    <div class="award-details">
+                        <ul>
+                            <li>Best Use of New Technology</li>
+                            <li>Best Overall CTV Plan</li>
+                            <li>Most Innovative Media Mix</li>
+                            <li>Best Digital Outdoor</li>
+                            <li>Innovation in Media Buying</li>
+                        </ul>
+                    </div>
                 </div>
                 
                 <div class="award-card">
+                    <div class="award-icon">
+                        <div class="award-sparkle"></div>
+                        <div class="award-sparkle"></div>
+                        <div class="award-sparkle"></div>
+                    </div>
                     <div class="award-card-number">18</div>
                     <div class="award-card-label">Pollie Awards</div>
                     <div class="award-card-sub">Campaign Innovation</div>
+                    <div class="award-details">
+                        <ul>
+                            <li>Best Use of Data Analytics</li>
+                            <li>Best Digital Technology</li>
+                            <li>Voter Targeting Innovation</li>
+                            <li>Best Use of Digital Audio</li>
+                            <li>AI-Powered Targeting</li>
+                        </ul>
+                    </div>
                 </div>
                 
                 <div class="award-card">
+                    <div class="award-icon">
+                        <div class="award-sparkle"></div>
+                        <div class="award-sparkle"></div>
+                        <div class="award-sparkle"></div>
+                    </div>
                     <div class="award-card-number">2</div>
                     <div class="award-card-label">Campaign Tech</div>
                     <div class="award-card-sub">Technology Leadership</div>
+                    <div class="award-details">
+                        <ul>
+                            <li>Best Campaign Technology Innovation</li>
+                            <li>Platform of the Year</li>
+                            <li>Advanced Analytics Excellence</li>
+                        </ul>
+                    </div>
                 </div>
             </div>
         </div>
@@ -887,6 +1316,19 @@
             
             <div class="capability-grid">
                 <div class="capability-block">
+                    <div class="capability-visual">
+                        <div class="data-constellation">
+                            <div class="constellation-node" style="top: 20%; left: 30%;"></div>
+                            <div class="constellation-node" style="top: 40%; left: 70%;"></div>
+                            <div class="constellation-node" style="top: 60%; left: 20%;"></div>
+                            <div class="constellation-node" style="top: 80%; left: 60%;"></div>
+                            <div class="constellation-node" style="top: 30%; left: 50%;"></div>
+                            <div class="constellation-line" style="width: 120px; top: 25%; left: 35%; transform: rotate(25deg);"></div>
+                            <div class="constellation-line" style="width: 80px; top: 45%; left: 25%; transform: rotate(-45deg);"></div>
+                            <div class="constellation-line" style="width: 100px; top: 65%; left: 25%; transform: rotate(65deg);"></div>
+                            <div class="data-pulse"></div>
+                        </div>
+                    </div>
                     <h3><span class="highlight-define">Define</span> Your Audience</h3>
                     <p>Every campaign starts with precision. We don't guess who matters - we know.</p>
                     <ul class="capability-features">
@@ -899,6 +1341,16 @@
                 </div>
                 
                 <div class="capability-block">
+                    <div class="capability-visual">
+                        <div class="signal-wave-container">
+                            <div class="signal-wave signal-wave-1"></div>
+                            <div class="signal-wave signal-wave-2"></div>
+                            <div class="signal-wave signal-wave-3"></div>
+                            <div class="signal-center">
+                                <div class="signal-core"></div>
+                            </div>
+                        </div>
+                    </div>
                     <h3><span class="highlight-find">Find</span> Them Everywhere</h3>
                     <p>Your audience isn't in one place. Neither are we. Complete reach across every screen.</p>
                     <ul class="capability-features">

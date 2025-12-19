@@ -970,7 +970,11 @@
                                         <stop offset="0%" stop-color="#00aeef"/>
                                         <stop offset="100%" stop-color="#0284c7"/>
                                     </linearGradient>
+                                    <filter id="subtle-shadow">
+                                        <feDropShadow dx="0" dy="2" stdDeviation="4" flood-opacity="0.1"/>
+                                    </filter>
                                 </defs>
+                                
                                 <!-- Connection lines -->
                                 <line x1="180" y1="180" x2="180" y2="80" stroke="#00aeef" stroke-width="1" opacity="0.15"/>
                                 <line x1="180" y1="180" x2="260" y2="100" stroke="#00aeef" stroke-width="1" opacity="0.15"/>
@@ -980,30 +984,59 @@
                                 <line x1="180" y1="180" x2="100" y2="260" stroke="#00aeef" stroke-width="1" opacity="0.15"/>
                                 <line x1="180" y1="180" x2="80" y2="180" stroke="#00aeef" stroke-width="1" opacity="0.15"/>
                                 <line x1="180" y1="180" x2="100" y2="100" stroke="#00aeef" stroke-width="1" opacity="0.15"/>
+                                
                                 <!-- Central hub -->
-                                <circle cx="180" cy="180" r="50" fill="url(#centerGradient)"/>
-                                <text x="180" y="175" text-anchor="middle" fill="white" font-size="26" font-weight="900">220M+</text>
-                                <text x="180" y="192" text-anchor="middle" fill="rgba(255,255,255,0.85)" font-size="9" font-weight="600" letter-spacing="0.8">PROFILES</text>
+                                <circle cx="180" cy="180" r="50" fill="url(#centerGradient)" filter="url(#subtle-shadow)"/>
+                                <text x="180" y="175" text-anchor="middle" fill="white" font-size="26" font-weight="900" font-family="Inter">220M+</text>
+                                <text x="180" y="192" text-anchor="middle" fill="rgba(255,255,255,0.85)" font-size="9" font-weight="600" font-family="Inter" letter-spacing="0.8">PROFILES</text>
+                                
                                 <!-- Outer nodes -->
                                 <g class="network-node" transform="translate(180, 80)">
                                     <circle r="28" fill="white" stroke="#e5e7eb" stroke-width="1"/>
-                                    <text y="-2" text-anchor="middle" fill="#083050" font-size="10" font-weight="700">1,300+</text>
-                                    <text y="10" text-anchor="middle" fill="#6b7280" font-size="8" font-weight="500">Data Points</text>
+                                    <text y="-2" text-anchor="middle" fill="#083050" font-size="10" font-weight="700" font-family="Inter">1,300+</text>
+                                    <text y="10" text-anchor="middle" fill="#6b7280" font-size="8" font-weight="500" font-family="Inter">Data Points</text>
                                 </g>
+                                
+                                <g class="network-node" transform="translate(260, 100)">
+                                    <circle r="28" fill="white" stroke="#e5e7eb" stroke-width="1"/>
+                                    <text y="-2" text-anchor="middle" fill="#083050" font-size="10" font-weight="700" font-family="Inter">45M</text>
+                                    <text y="10" text-anchor="middle" fill="#6b7280" font-size="8" font-weight="500" font-family="Inter">Households</text>
+                                </g>
+                                
                                 <g class="network-node" transform="translate(280, 180)">
                                     <circle r="28" fill="white" stroke="#e5e7eb" stroke-width="1"/>
-                                    <text y="-2" text-anchor="middle" fill="#083050" font-size="10" font-weight="700">7M</text>
-                                    <text y="10" text-anchor="middle" fill="#6b7280" font-size="8" font-weight="500">HCPs</text>
+                                    <text y="-2" text-anchor="middle" fill="#083050" font-size="10" font-weight="700" font-family="Inter">7M</text>
+                                    <text y="10" text-anchor="middle" fill="#6b7280" font-size="8" font-weight="500" font-family="Inter">HCPs</text>
                                 </g>
+                                
+                                <g class="network-node" transform="translate(260, 260)">
+                                    <circle r="28" fill="white" stroke="#e5e7eb" stroke-width="1"/>
+                                    <text y="-2" text-anchor="middle" fill="#083050" font-size="10" font-weight="700" font-family="Inter">6M</text>
+                                    <text y="10" text-anchor="middle" fill="#6b7280" font-size="8" font-weight="500" font-family="Inter">Business</text>
+                                </g>
+                                
                                 <g class="network-node" transform="translate(180, 280)">
                                     <circle r="28" fill="white" stroke="#e5e7eb" stroke-width="1"/>
-                                    <text y="-2" text-anchor="middle" fill="#083050" font-size="10" font-weight="700">Real-Time</text>
-                                    <text y="10" text-anchor="middle" fill="#6b7280" font-size="8" font-weight="500">Updates</text>
+                                    <text y="-2" text-anchor="middle" fill="#083050" font-size="10" font-weight="700" font-family="Inter">Real-Time</text>
+                                    <text y="10" text-anchor="middle" fill="#6b7280" font-size="8" font-weight="500" font-family="Inter">Updates</text>
                                 </g>
+                                
+                                <g class="network-node" transform="translate(100, 260)">
+                                    <circle r="28" fill="white" stroke="#e5e7eb" stroke-width="1"/>
+                                    <text y="-2" text-anchor="middle" fill="#083050" font-size="10" font-weight="700" font-family="Inter">1.5M</text>
+                                    <text y="10" text-anchor="middle" fill="#6b7280" font-size="8" font-weight="500" font-family="Inter">Influencers</text>
+                                </g>
+                                
                                 <g class="network-node" transform="translate(80, 180)">
                                     <circle r="28" fill="white" stroke="#e5e7eb" stroke-width="1"/>
-                                    <text y="-2" text-anchor="middle" fill="#083050" font-size="10" font-weight="700">Cross</text>
-                                    <text y="10" text-anchor="middle" fill="#6b7280" font-size="8" font-weight="500">Channel</text>
+                                    <text y="-2" text-anchor="middle" fill="#083050" font-size="10" font-weight="700" font-family="Inter">Cross</text>
+                                    <text y="10" text-anchor="middle" fill="#6b7280" font-size="8" font-weight="500" font-family="Inter">Channel</text>
+                                </g>
+                                
+                                <g class="network-node" transform="translate(100, 100)">
+                                    <circle r="28" fill="white" stroke="#e5e7eb" stroke-width="1"/>
+                                    <text y="-2" text-anchor="middle" fill="#083050" font-size="10" font-weight="700" font-family="Inter">Enriched</text>
+                                    <text y="10" text-anchor="middle" fill="#6b7280" font-size="8" font-weight="500" font-family="Inter">Audiences</text>
                                 </g>
                             </svg>
                         </div>

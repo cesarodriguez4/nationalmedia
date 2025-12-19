@@ -1,18 +1,84 @@
 <!-- Footer Bridge -->
+<%
+// Default values for footer content (used on home and technology pages)
+const footerStyle = typeof locals.footerStyle !== 'undefined' ? locals.footerStyle : 'default';
+const footerTitle1 = typeof locals.footerTitle1 !== 'undefined' ? locals.footerTitle1 : 'The Problem <br> Most Agencies';
+const footerAccent = typeof locals.footerAccent !== 'undefined' ? locals.footerAccent : 'Ignore';
+const footerTitle2 = typeof locals.footerTitle2 !== 'undefined' ? locals.footerTitle2 : '';
+const footerSubtext = typeof locals.footerSubtext !== 'undefined' ? locals.footerSubtext : '94% of political ad dollars reach only half the audience. We find the other half.';
+const footerCtaText = typeof locals.footerCtaText !== 'undefined' ? locals.footerCtaText : 'SEE THE PROBLEM';
+const footerCtaLink = typeof locals.footerCtaLink !== 'undefined' ? locals.footerCtaLink : 'mailto:info@natmedia.com';
+%>
+
+<% if (footerStyle === 'technology') { %>
+<!-- Technology Page Footer - Centered style matching reference design -->
+<footer class="footer-technology" id="contact">
+    <div class="footer-technology__texture"></div>
+    <div class="container">
+        <div class="footer-technology__content">
+            <h2 class="footer-technology__title">
+                <%- footerTitle1 %><br>
+                <span class="footer-technology__highlight"><%- footerAccent %></span>
+            </h2>
+            <p class="footer-technology__description"><%- footerSubtext %></p>
+            <a href="<%= footerCtaLink %>" class="footer-technology__button">
+                <%= footerCtaText %>
+            </a>
+            <div class="footer-technology__bottom">
+                <div class="footer-info">
+                    <p class="footer-tag">Founded 1985</p>
+                    <p class="footer-contact"><a href="mailto:info@natmedia.com">info@natmedia.com</a></p>
+                </div>
+            </div>
+        </div>
+    </div>
+</footer>
+<% } else if (footerStyle === 'problem') { %>
+<!-- Problem Page Footer - Left-aligned style matching reference design -->
+<footer class="footer-problem" id="contact">
+    <div class="footer-problem__texture"></div>
+    <div class="container">
+        <div class="footer-problem__content">
+            <h3 class="footer-problem__title">
+                <%- footerTitle1 %>
+                <span class="footer-problem__accent"><%- footerAccent %></span>
+                <% if (footerTitle2) { %><%- footerTitle2 %><% } %>
+            </h3>
+            <p class="footer-problem__description"><%- footerSubtext %></p>
+            <div class="footer-problem__cta-wrapper">
+                <a href="<%= footerCtaLink %>" class="footer-problem__link">
+                    <span><%= footerCtaText %></span>
+                    <svg class="footer-problem__arrow" width="20" height="20" viewBox="0 0 20 20" fill="none">
+                        <path d="M7 5L12 10L7 15" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                    </svg>
+                </a>
+            </div>
+            <div class="footer-problem__bottom">
+                <div class="footer-info">
+                    <p class="footer-tag">Founded 1985</p>
+                    <p class="footer-contact"><a href="mailto:info@natmedia.com">info@natmedia.com</a></p>
+                </div>
+            </div>
+        </div>
+    </div>
+</footer>
+<% } else { %>
+<!-- Default Footer - Centered style -->
 <footer class="footer-bridge" id="contact">
     <div class="bridge-texture"></div>
     <div class="container bridge-content">
         <div class="bridge-headline">
             <h2 class="bridge-statement">
-                The Problem <br> Most Agencies
-                <span class="bridge-emphasis">Ignore</span>
+                <%- footerTitle1 %>
+                <span class="bridge-emphasis"><%- footerAccent %></span>
+                <% if (footerTitle2) { %><%- footerTitle2 %><% } %>
             </h2>
-            <p class="bridge-subtext">94% of political ad dollars reach only hald the audience. We find the other half.</p>
+            <p class="bridge-subtext"><%- footerSubtext %></p>
         </div>
         
         <div class="bridge-cta">
-            <a href="mailto:info@natmedia.com" class="bridge-button">
-                <span>SEE THE PROBLEM</span>
+            <a href="<%= footerCtaLink %>" class="bridge-button">
+                <span><%= footerCtaText %></span>
                 <svg class="bridge-arrow" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
                     <path d="M5 12h14M12 5l7 7-7 7"/>
                 </svg>
@@ -27,5 +93,6 @@
         </div>
     </div>
 </footer>
+<% } %>
 
 

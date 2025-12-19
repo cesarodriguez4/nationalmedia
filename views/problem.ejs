@@ -1103,7 +1103,15 @@
         </div>
     </section>
 
-    <%- include('partials/footer') %>
+    <%- include('partials/footer', {
+        footerStyle: 'problem',
+        footerTitle1: 'Hire an Agency That',
+        footerAccent: 'Understands Reality',
+        footerTitle2: '& Doesn\'t Hide From It.',
+        footerSubtext: 'See the system we built to solve this problem.',
+        footerCtaText: 'EXPLORE OUR SYSTEM',
+        footerCtaLink: '/technology'
+    }) %>
 
     <script>
         // Navbar scroll effect
